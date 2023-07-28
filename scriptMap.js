@@ -174,8 +174,15 @@
                                 code: communeCode,
                                 nom: feature.properties.nom, // Assumer que 'nom' est la propriété contenant le nom de la commune
                               };
-                              selectedCommunesCodinsee.push(commune);
-                              layer.setStyle({ fillColor: 'blue' }); // Change la couleur de la commune sélectionnée
+                              if (!selectedCommunesCodinsee.some(comm => comm.code === communeCode)) {
+                                selectedCommunesCodinsee.push(commune);
+                                layer.setStyle({ fillColor: 'blue' }); // Change la couleur de la commune sélectionnée
+                              } else {
+                                // Si la commune est déjà sélectionnée, la supprimer
+                                selectedCommunesCodinsee = selectedCommunesCodinsee.filter(comm => comm.code !== communeCode);
+                                layer.setStyle({ fillColor: '' }); // Rétablir la couleur originale de la commune
+                              }
+                              updateComsecT();
                             }
 
                             // Vérifier si la commune a déjà été cliquée
@@ -281,12 +288,19 @@
                                                 l_codinsee
                                             ).properties.nom,
                                           };
-                                          selectedSectionsCodinsee.push(
-                                            section
-                                          );
-                                          layer.setStyle({
-                                            fillColor: 'green',
-                                          }); // Change la couleur de la section sélectionnée
+                                          if (!selectedSectionsCodinsee.some(sec => sec.code === section.code)) {
+                                            selectedSectionsCodinsee.push(
+                                              section
+                                            );
+                                            layer.setStyle({
+                                              fillColor: 'green',
+                                            }); // Change la couleur de la section sélectionnée
+                                          } else {
+                                            // Si la section est déjà sélectionnée, la supprimer
+                                            selectedSectionsCodinsee = selectedSectionsCodinsee.filter(sec => sec.code !== section.code);
+                                            layer.setStyle({ fillColor: '' }); // Rétablir la couleur originale de la section
+                                          }
+                                          updateComsecT();
                                         }
 
                                         // Vérifier si la section a déjà été cliquée
@@ -398,3 +412,20 @@
       });
       clickedCommunes = [];
     });
+
+    function updateComsecT() {
+      var comsecT = document.getElementById('comsecT');
+      comsecT.innerHTML = '';
+      selectedCommunesCodinsee.forEach(function (commune) {
+        var communeDiv = document.createElement('div');
+        communeDiv.textContent = commune.nom;
+        communeDiv.classList.add('commune-item');
+        comsecT.appendChild(communeDiv);
+      });
+      selectedSectionsCodinsee.forEach(function (section) {
+        var sectionDiv = document.createElement('div');
+        sectionDiv.textContent = section.nom;
+        sectionDiv.classList.add('section-item');
+        comsecT.appendChild(sectionDiv);
+      });
+    }
