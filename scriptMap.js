@@ -15,40 +15,41 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
+var comsecTDiv = document.getElementById('comsecT');
 
-document.getElementById('Count').addEventListener('change', function(event) {
-  // Obtenir l'élément comsecT
-  var comsecTDiv = document.getElementById('comsecT');
+// Ajout de la fonction pour mettre à jour le total
+function updateTotalVentes(communeCode, decrement = false) {
+  var ventesDansCetteCommune = ventes.flatMap(vente => {
+    var venteCommunes = JSON.parse(vente.l_codinsee.replace(/'/g, "\""));
+    var venteSections = JSON.parse(vente.l_section.replace(/'/g, "\""));
+      
+    return venteCommunes.map((commune, index) => ({
+      id: commune,
+      section: venteSections[index],
+      vente: vente
+    }));
+  }).filter(venteParCommune => 
+    venteParCommune.id === communeCode && 
+    (venteParCommune.vente.idnatmut === "1" || venteParCommune.vente.idnatmut === "4") && 
+    (venteParCommune.vente.codtypbien.startsWith('1') && venteParCommune.vente.codtypbien !== '14' || venteParCommune.vente.codtypbien === '21') && 
+    venteParCommune.vente.anneemut >= "2017" && venteParCommune.vente.anneemut <= "2020"
+  );
 
-  if (event.target.checked) {
-      // Si la case Count est cochée, affichez les noms des communes sélectionnées
-      comsecTDiv.innerHTML = selectedCommunesCodinsee.map(commune => commune.nom).join(', ');
-
+  if (decrement) {
+    totalVentes -= Math.round(ventesDansCetteCommune.length / 4);
   } else {
-      // Si la case Count est décochée, effacez le contenu de comsecT
-      comsecTDiv.innerHTML = '';
+    totalVentes += Math.round(ventesDansCetteCommune.length / 4);
+  }
 
-      // Vous pouvez également décolorer les communes et mettre à jour le total ici
-      selectedCommunesCodinsee.forEach(commune => {
-          // Supprimer les ventes de cette commune du total
-          var ventesToRemove = Math.round(commune.ventes.length / 4);
-          totalVentes -= ventesToRemove;
+  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+}
 
-          // Changer la couleur de la commune
-          var layer = map.getLayer(commune.code);
-          if (layer) {
-              layer.setStyle({ fillColor: 'blue' });  // Remplacez 'blue' par la couleur d'origine
-          }
-      });
-
-      // Réinitialiser selectedCommunesCodinsee
-      selectedCommunesCodinsee = [];
-
-      // Mettre à jour le total de ventes
-      document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+document.getElementById('Count').addEventListener('click', function() {
+  if (clickedCommunes.length === 0) {
+    totalVentes = 0;
+    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
 });
-
   
 document.getElementById('Export').addEventListener('click', function() {
   // Récupérer le conteneur d'input
@@ -206,8 +207,17 @@ select.addEventListener('change', function () {
 
                         if (document.getElementById("Communes").checked) {
                           if (document.getElementById("Count").checked) {
-                            totalVentes += Math.round(ventesDansCetteCommune.length / 4);
-                            document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                            updateTotalVentes(communeCode);
+                      
+                            var communeElement = document.createElement('div');
+                            communeElement.textContent = communeNom;
+                            communeElement.dataset.communeCode = communeCode;  // Stocker le code de la commune pour le retrouver lors de la suppression
+                            communeElement.addEventListener('click', function () {
+                              updateTotalVentes(communeCode, true);  // Mettre à jour le total en décrémentant
+                              comsecTDiv.removeChild(communeElement);  // Supprimer la commune de la div
+                            });
+                            comsecTDiv.appendChild(communeElement);
+                      
                             layer.setStyle({ fillColor: 'red' });
                             clickedCommunes.push(layer);
                           } else {
