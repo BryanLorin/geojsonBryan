@@ -1,9 +1,10 @@
-
+<script>
     var map = L.map('map').setView([45.7, 3.15], 7);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
     }).addTo(map);
+
     var communesData;
     var ventes;
     var totalVentes = 0;
@@ -23,11 +24,14 @@
         document.getElementById('NumberSell').textContent = 'Total: ' + totalVentes;
       }
     });
+
     document.getElementById('Export').addEventListener('click', function () {
       // Récupérer le conteneur d'input
       var inputContainer = document.querySelector('.pop-up-form .input-container');
+
       // Supprimer les anciens inputs
       inputContainer.innerHTML = '';
+
       // Créer un nouvel input pour les communes sélectionnées
       var communesInput = document.createElement('input');
       communesInput.type = 'text';
@@ -45,6 +49,7 @@
         .join(', ');
       sectionsInput.readOnly = true; // Rendre l'input en lecture seule
       inputContainer.appendChild(sectionsInput);
+
       // Calculate totalVentes for selected communes
       selectedCommunesCodinsee.forEach((selectedCommune) => {
         var ventesDansCetteCommune = ventes
@@ -107,6 +112,7 @@
       // Display the total sales
       document.getElementById('TotalSecteur').value = totalSecteur;
     });
+
     select.addEventListener('change', function () {
       var region = this.value;
       map.eachLayer(function (layer) {
@@ -115,6 +121,7 @@
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
       }).addTo(map);
+
       fetch(
         `https://raw.githubusercontent.com/BryanLorin/geojsonBryan/main/${region}/departements-${region}.geojson`
       )
@@ -134,6 +141,7 @@
                   .then((data) => {
                     ventes = data;
                   });
+
                 fetch(
                   `https://raw.githubusercontent.com/BryanLorin/geojsonBryan/main/${region}/communes-${region}.geojson`
                 )
@@ -150,7 +158,8 @@
                     if (communesLayer) {
                       map.removeLayer(communesLayer);
                     }
-                   communesLayer = L.geoJSON(filteredCommunes, {
+
+                    communesLayer = L.geoJSON(filteredCommunes, {
                       onEachFeature: function (feature, layer) {
                         layer.on({
                           click: function () {
@@ -165,15 +174,8 @@
                                 code: communeCode,
                                 nom: feature.properties.nom, // Assumer que 'nom' est la propriété contenant le nom de la commune
                               };
-                              if (!selectedCommunesCodinsee.some(comm => comm.code === communeCode)) {
-                                selectedCommunesCodinsee.push(commune);
-                                layer.setStyle({ fillColor: 'blue' }); // Change la couleur de la commune sélectionnée
-                              } else {
-                                // Si la commune est déjà sélectionnée, la supprimer
-                                selectedCommunesCodinsee = selectedCommunesCodinsee.filter(comm => comm.code !== communeCode);
-                                layer.setStyle({ fillColor: '' }); // Rétablir la couleur originale de la commune
-                              }
-                              updateComsecT();
+                              selectedCommunesCodinsee.push(commune);
+                              layer.setStyle({ fillColor: 'blue' }); // Change la couleur de la commune sélectionnée
                             }
 
                             // Vérifier si la commune a déjà été cliquée
@@ -185,7 +187,8 @@
                             if (alreadyClicked) {
                               return; // Si la commune a déjà été cliquée, ne rien faire
                             }
-                          var ventesDansCetteCommune = ventes
+
+                            var ventesDansCetteCommune = ventes
                               .flatMap((vente) => {
                                 var venteCommunes = JSON.parse(
                                   vente.l_codinsee.replace(/'/g, '"')
@@ -213,6 +216,7 @@
                                   venteParCommune.vente.anneemut >= '2017' &&
                                   venteParCommune.vente.anneemut <= '2020'
                               );
+
                             if (document.getElementById('Communes').checked) {
                               if (document.getElementById('Count').checked) {
                                 totalVentes += Math.round(
@@ -232,7 +236,8 @@
                             }
 
                             if (document.getElementById('Sections').checked) {
-                              fetch(           `https://raw.githubusercontent.com/BryanLorin/geojsonBryan/main/${region}/sections-${region}-${departementCode}.json`
+                              fetch(
+                                `https://raw.githubusercontent.com/BryanLorin/geojsonBryan/main/${region}/sections-${region}-${departementCode}.json`
                               )
                                 .then(function (response) {
                                   return response.json();
@@ -242,9 +247,11 @@
                                     communeCode,
                                     sections
                                   );
+
                                   if (sectionsLayer) {
                                     map.removeLayer(sectionsLayer);
                                   }
+
                                   sectionsLayer = L.geoJSON(filteredSections, {
                                     onEachFeature: function (feature, layer) {
                                       layer.on('click', function () {
@@ -274,19 +281,12 @@
                                                 l_codinsee
                                             ).properties.nom,
                                           };
-                                          if (!selectedSectionsCodinsee.some(sec => sec.code === section.code)) {
-                                            selectedSectionsCodinsee.push(
-                                              section
-                                            );
-                                            layer.setStyle({
-                                              fillColor: 'green',
-                                            }); // Change la couleur de la section sélectionnée
-                                          } else {
-                                            // Si la section est déjà sélectionnée, la supprimer
-                                            selectedSectionsCodinsee = selectedSectionsCodinsee.filter(sec => sec.code !== section.code);
-                                            layer.setStyle({ fillColor: '' }); // Rétablir la couleur originale de la section
-                                          }
-                                          updateComsecT();
+                                          selectedSectionsCodinsee.push(
+                                            section
+                                          );
+                                          layer.setStyle({
+                                            fillColor: 'green',
+                                          }); // Change la couleur de la section sélectionnée
                                         }
 
                                         // Vérifier si la section a déjà été cliquée
@@ -299,6 +299,7 @@
                                         if (alreadyClicked) {
                                           return; // Si la section a déjà été cliquée, ne rien faire
                                         }
+
                                         var ventesDansCetteSection = ventes
                                           .flatMap((vente) => {
                                             var venteCommunes = JSON.parse(
@@ -373,17 +374,20 @@
           }).addTo(map);
         });
     });
+
     function filterCommunes(departementCode, communes) {
       return communes.features.filter(function (commune) {
         return commune.properties.code.startsWith(departementCode);
       });
     }
+
     function filterSections(communeCode, sections) {
       return sections.features.filter(function (section) {
         return section.properties.id.startsWith(communeCode);
       });
     }
-  // Reset totalVentes and clickedCommunes when reset button is clicked
+
+    // Reset totalVentes and clickedCommunes when reset button is clicked
     document.getElementById('reset').addEventListener('click', function () {
       totalVentes = 0;
       document.getElementById('NumberSell').textContent = '';
@@ -394,19 +398,4 @@
       });
       clickedCommunes = [];
     });
-    function updateComsecT() {
-      var comsecT = document.getElementById('comsecT');
-      comsecT.innerHTML = '';
-      selectedCommunesCodinsee.forEach(function (commune) {
-        var communeDiv = document.createElement('div');
-        communeDiv.textContent = commune.nom;
-        communeDiv.classList.add('commune-item');
-        comsecT.appendChild(communeDiv);
-      });
-      selectedSectionsCodinsee.forEach(function (section) {
-        var sectionDiv = document.createElement('div');
-        sectionDiv.textContent = section.nom;
-        sectionDiv.classList.add('section-item');
-        comsecT.appendChild(sectionDiv);
-      });
-    }
+</script>
