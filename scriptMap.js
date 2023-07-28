@@ -1,4 +1,4 @@
-<script>
+
     var map = L.map('map').setView([45.7, 3.15], 7);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -398,4 +398,3 @@
       });
       clickedCommunes = [];
     });
-</script>
