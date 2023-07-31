@@ -38,7 +38,7 @@ document.getElementById('Count').addEventListener('click', function() {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
     sectionInput.value = `Section ${l_section}: ${communesData.features.find(commune => commune.properties.code === l_codinsee).properties.nom}`;
-    console.log(sectionInput.value);
+    console.log(sectionInput);
     sectionInput.readOnly = true;  // Rendre l'input en lecture seule
     comsecTDiv.appendChild(sectionInput);
   });
