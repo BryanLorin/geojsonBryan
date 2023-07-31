@@ -21,7 +21,7 @@ document.getElementById('Count').addEventListener('click', function() {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
-});
+}); 
   
 document.getElementById('Export').addEventListener('click', function() {
   // Récupérer le conteneur d'input
