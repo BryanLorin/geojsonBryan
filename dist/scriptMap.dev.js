@@ -41,6 +41,7 @@ document.getElementById('Count').addEventListener('click', function () {
     sectionInput.value = "Section ".concat(l_section, ": ").concat(communesData.features.find(function (commune) {
       return commune.properties.code === l_codinsee;
     }).properties.nom);
+    console.log(sectionInput.value);
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);
