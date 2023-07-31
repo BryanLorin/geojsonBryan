@@ -14,41 +14,45 @@ var selectedSectionsCodinsee = [];
 var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
-var select = document.getElementById('region');
 var comsecTDiv = document.getElementById('comsecT');
+var select = document.getElementById('region');
 
-// Ajout de la fonction pour mettre à jour le total
-function updateTotalVentes(communeCode, decrement = false) {
-  var ventesDansCetteCommune = ventes.flatMap(vente => {
-    var venteCommunes = JSON.parse(vente.l_codinsee.replace(/'/g, "\""));
-    var venteSections = JSON.parse(vente.l_section.replace(/'/g, "\""));
-      
-    return venteCommunes.map((commune, index) => ({
-      id: commune,
-      section: venteSections[index],
-      vente: vente
-    }));
-  }).filter(venteParCommune => 
-    venteParCommune.id === communeCode && 
-    (venteParCommune.vente.idnatmut === "1" || venteParCommune.vente.idnatmut === "4") && 
-    (venteParCommune.vente.codtypbien.startsWith('1') && venteParCommune.vente.codtypbien !== '14' || venteParCommune.vente.codtypbien === '21') && 
-    venteParCommune.vente.anneemut >= "2017" && venteParCommune.vente.anneemut <= "2020"
-  );
 
-  if (decrement) {
-    totalVentes -= Math.round(ventesDansCetteCommune.length / 4);
-  } else {
-    totalVentes += Math.round(ventesDansCetteCommune.length / 4);
-  }
+function createSelectionDiv(type, item, color) {
+  var div = document.createElement('div');
+  div.className = type + '-selection';
+  div.style.color = color;
+  div.textContent = item.nom + ': ' + item.code;
+  div.addEventListener('click', function () {
+    if (type === 'commune') {
+      clickedCommunes = clickedCommunes.filter(clicked => clicked.code !== item.code);
+    } else {
+      clickedSections = clickedSections.filter(clicked => clicked.code !== item.code);
+    }
 
-  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+    totalVentes -= item.ventes;
+    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+
+    comsecTDiv.removeChild(div);
+  });
+  return div;
 }
 
 document.getElementById('Count').addEventListener('click', function() {
-  if (clickedCommunes.length === 0) {
-    totalVentes = 0;
-    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-  }
+  comsecTDiv.innerHTML = '';
+  totalVentes = 0;
+
+  clickedCommunes.forEach(commune => {
+    comsecTDiv.appendChild(createSelectionDiv('commune', commune, 'blue'));
+    totalVentes += commune.ventes;
+  });
+
+  clickedSections.forEach(section => {
+    comsecTDiv.appendChild(createSelectionDiv('section', section, 'red'));
+    totalVentes += section.ventes;
+  });
+
+  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
 });
   
 document.getElementById('Export').addEventListener('click', function() {
@@ -207,17 +211,8 @@ select.addEventListener('change', function () {
 
                         if (document.getElementById("Communes").checked) {
                           if (document.getElementById("Count").checked) {
-                            updateTotalVentes(communeCode);
-                      
-                            var communeElement = document.createElement('div');
-                            communeElement.textContent = communeNom;
-                            communeElement.dataset.communeCode = communeCode;  // Stocker le code de la commune pour le retrouver lors de la suppression
-                            communeElement.addEventListener('click', function () {
-                              updateTotalVentes(communeCode, true);  // Mettre à jour le total en décrémentant
-                              comsecTDiv.removeChild(communeElement);  // Supprimer la commune de la div
-                            });
-                            comsecTDiv.appendChild(communeElement);
-                      
+                            totalVentes += Math.round(ventesDansCetteCommune.length / 4);
+                            document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
                             layer.setStyle({ fillColor: 'red' });
                             clickedCommunes.push(layer);
                           } else {
@@ -319,6 +314,17 @@ function filterSections(communeCode, sections) {
   return sections.features.filter(function (section) {
     return section.properties.id.startsWith(communeCode);
   });
+}
+function onCommuneClick(e) {
+  // ...
+  clickedCommunes.push({ code: communeCode, nom: communeName, ventes: communeVentes });
+  // ...
+}
+
+function onSectionClick(e) {
+  // ...
+  clickedSections.push({ code: sectionCode, nom: sectionName, ventes: sectionVentes });
+  // ...
 }
   // Reset totalVentes and clickedCommunes when reset button is clicked
 document.getElementById("reset").addEventListener('click', function () {
