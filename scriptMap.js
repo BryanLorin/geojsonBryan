@@ -33,14 +33,14 @@ document.getElementById('Count').addEventListener('click', function() {
     comsecTDiv.appendChild(communeInput);
   });
 
- // Pour chaque section rattachée, créez un nouvel élément input et ajoutez-le à comsecTDiv
- sectionsRattachees.forEach(section => {
-  var sectionInput = document.createElement('input');
-  sectionInput.type = 'text';
-  sectionInput.value = `${section.nom}: ${section.code}`;
-  sectionInput.readOnly = true;  // Rendre l'input en lecture seule
-  comsecTDiv.appendChild(sectionInput);
-});
+  // Pour chaque section rattachée, créez un nouvel élément input et ajoutez-le à comsecTDiv
+  sectionsRattachees.forEach(section => {
+    var sectionInput = document.createElement('input');
+    sectionInput.type = 'text';
+    sectionInput.value = `${section.nom_section}: ${section.code_section}`;
+    sectionInput.readOnly = true;  // Rendre l'input en lecture seule
+    comsecTDiv.appendChild(sectionInput);
+  });
 
   // Votre code existant
   if (clickedCommunes.length === 0) {

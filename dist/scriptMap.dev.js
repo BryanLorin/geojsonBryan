@@ -38,7 +38,7 @@ document.getElementById('Count').addEventListener('click', function () {
   sectionsRattachees.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
+    sectionInput.value = "".concat(section.nom_section, ": ").concat(section.code_section);
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);
