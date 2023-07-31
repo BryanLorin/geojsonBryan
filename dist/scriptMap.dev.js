@@ -33,14 +33,12 @@ document.getElementById('Count').addEventListener('click', function () {
     communeInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(communeInput);
-  }); // Pour chaque section sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
+  }); // Pour chaque section rattachée, créez un nouvel élément input et ajoutez-le à comsecTDiv
 
-  console.log(selectedSectionsCodinsee);
-  selectedSectionsCodinsee.forEach(function (section) {
+  sectionsRattachees.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = "Section ".concat(section.code, ": ").concat(section.nom);
-    console.log(sectionInput);
+    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);

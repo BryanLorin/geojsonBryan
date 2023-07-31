@@ -33,15 +33,13 @@ document.getElementById('Count').addEventListener('click', function() {
     comsecTDiv.appendChild(communeInput);
   });
 
-  // Pour chaque section sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
-  console.log(selectedSectionsCodinsee);
-selectedSectionsCodinsee.forEach(section => {
-    var sectionInput = document.createElement('input');
-    sectionInput.type = 'text';
-    sectionInput.value = `Section ${section.code}: ${section.nom}`;
-    console.log(sectionInput);
-    sectionInput.readOnly = true;  // Rendre l'input en lecture seule
-    comsecTDiv.appendChild(sectionInput);
+ // Pour chaque section rattachée, créez un nouvel élément input et ajoutez-le à comsecTDiv
+ sectionsRattachees.forEach(section => {
+  var sectionInput = document.createElement('input');
+  sectionInput.type = 'text';
+  sectionInput.value = `${section.nom}: ${section.code}`;
+  sectionInput.readOnly = true;  // Rendre l'input en lecture seule
+  comsecTDiv.appendChild(sectionInput);
 });
 
   // Votre code existant
