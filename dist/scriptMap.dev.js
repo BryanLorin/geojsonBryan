@@ -38,7 +38,9 @@ document.getElementById('Count').addEventListener('click', function () {
   selectedSectionsCodinsee.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
+    sectionInput.value = "Section ".concat(l_section, ": ").concat(communesData.features.find(function (commune) {
+      return commune.properties.code === l_codinsee;
+    }).properties.nom);
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);
