@@ -14,42 +14,15 @@ var selectedSectionsCodinsee = [];
 var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
+var comsecT = document.getElementById('comsecT');
 var select = document.getElementById('region');
 
 document.getElementById('Count').addEventListener('click', function() {
-  // Récupérer le conteneur d'input
-  var inputContainer = document.getElementById('comsecT');
-  
-  // Supprimer les anciens inputs
-  inputContainer.innerHTML = '';
-
-  if (clickedCommunes.length > 0) {
-    // Créer un nouvel élément input pour chaque commune sélectionnée
-    clickedCommunes.forEach(clickedCommune => {
-      var communeInput = document.createElement('input');
-      communeInput.type = 'text';
-      communeInput.value = clickedCommune.feature.properties.nom;  // Assumer que 'nom' est la propriété contenant le nom de la commune
-      communeInput.readOnly = true;  // Rendre l'input en lecture seule
-      inputContainer.appendChild(communeInput);
-    });
-  }
-
-  if (clickedSections.length > 0) {
-    // Créer un nouvel élément input pour chaque section sélectionnée
-    clickedSections.forEach(clickedSection => {
-      var sectionInput = document.createElement('input');
-      sectionInput.type = 'text';
-      sectionInput.value = clickedSection.feature.properties.nom;  // Assumer que 'nom' est la propriété contenant le nom de la section
-      sectionInput.readOnly = true;  // Rendre l'input en lecture seule
-      inputContainer.appendChild(sectionInput);
-    });
-  }
-
-  if (clickedCommunes.length === 0 && clickedSections.length === 0) {
+  if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
-});
+}); 
   
 document.getElementById('Export').addEventListener('click', function() {
   // Récupérer le conteneur d'input
@@ -179,7 +152,17 @@ select.addEventListener('change', function () {
                           selectedCommunesCodinsee.push(commune);
                           layer.setStyle({ fillColor: 'blue' }); // Change la couleur de la commune sélectionnée
                         }
-                      
+                        if(document.getElementById("Count").checked) {
+                          var commune = {
+                            code: communeCode,
+                            nom: feature.properties.nom  // Assumer que 'nom' est la propriété contenant le nom de la commune
+                          };
+                          selectedCommunesCodinsee.push(commune);
+                          layer.setStyle({ fillColor: 'blue' }); // Change la couleur de la commune sélectionnée
+                        
+                          // Ajouter la commune à la div comsecT
+                          addInputToComsecT(`Commune: ${commune.nom}`);
+                        }
                         // Vérifier si la commune a déjà été cliquée
                         var alreadyClicked = clickedCommunes.some(clickedCommune => 
                           clickedCommune._leaflet_id === layer._leaflet_id
@@ -238,7 +221,17 @@ select.addEventListener('change', function () {
                                   var l_codinsee = sectionID.substring(0, 5);
                                   var l_section = sectionID.substring(8);
                           
-
+                                  if(document.getElementById("Count").checked) {
+                                    var section = {
+                                      code: l_codinsee + '; ' + l_section,
+                                      nom: communesData.features.find(commune => commune.properties.code === l_codinsee).properties.nom
+                                    };
+                                    selectedSectionsCodinsee.push(section);
+                                    layer.setStyle({ fillColor: 'green' }); // Change la couleur de la section sélectionnée
+                                  
+                                    // Ajouter la section à la div comsecT
+                                    addInputToComsecT(`Section: ${section.nom}`);
+                                  }
                                   if(document.getElementById("Create").checked) {
                                   var section = {
                                     code: l_codinsee + '; ' + l_section,
@@ -311,6 +304,17 @@ function filterSections(communeCode, sections) {
     return section.properties.id.startsWith(communeCode);
   });
 }
+
+function addInputToComsecT(value) {
+  // Créer un nouvel élément input
+  var newInput = document.createElement('input');
+  newInput.type = 'text';
+  newInput.value = value;
+  newInput.readOnly = true;
+
+  // Ajouter le nouvel input à la div comsecT
+  comsecT.appendChild(newInput);
+}
   // Reset totalVentes and clickedCommunes when reset button is clicked
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
@@ -320,3 +324,4 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
+
