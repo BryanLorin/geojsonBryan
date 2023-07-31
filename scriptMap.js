@@ -17,15 +17,39 @@ var totalSecteur = 0;
 var select = document.getElementById('region');
 
 document.getElementById('Count').addEventListener('click', function() {
-  if (clickedCommunes.length === 0) {
+  // Récupérer le conteneur d'input
+  var inputContainer = document.getElementById('comsecT');
+  
+  // Supprimer les anciens inputs
+  inputContainer.innerHTML = '';
+
+  if (clickedCommunes.length > 0) {
+    // Créer un nouvel élément input pour chaque commune sélectionnée
+    clickedCommunes.forEach(clickedCommune => {
+      var communeInput = document.createElement('input');
+      communeInput.type = 'text';
+      communeInput.value = clickedCommune.feature.properties.nom;  // Assumer que 'nom' est la propriété contenant le nom de la commune
+      communeInput.readOnly = true;  // Rendre l'input en lecture seule
+      inputContainer.appendChild(communeInput);
+    });
+  }
+
+  if (clickedSections.length > 0) {
+    // Créer un nouvel élément input pour chaque section sélectionnée
+    clickedSections.forEach(clickedSection => {
+      var sectionInput = document.createElement('input');
+      sectionInput.type = 'text';
+      sectionInput.value = clickedSection.feature.properties.nom;  // Assumer que 'nom' est la propriété contenant le nom de la section
+      sectionInput.readOnly = true;  // Rendre l'input en lecture seule
+      inputContainer.appendChild(sectionInput);
+    });
+  }
+
+  if (clickedCommunes.length === 0 && clickedSections.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
- 
-  var inputContainer = document.getElementById('comsecT');  // Changez ceci avec l'ID de votre conteneur d'inputs
-  var communeInput = createInput(`${commune.nom}: ${commune.code}`);
-  inputContainer.appendChild(communeInput);
-}
-}); 
+  }
+});
   
 document.getElementById('Export').addEventListener('click', function() {
   // Récupérer le conteneur d'input
@@ -296,11 +320,3 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-
-function createInput(value) {
-  var input = document.createElement('input');
-  input.type = 'text';
-  input.value = value;
-  input.readOnly = true;  // Rendre l'input en lecture seule
-  return input;
-}
