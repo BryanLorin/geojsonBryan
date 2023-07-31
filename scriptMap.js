@@ -14,45 +14,58 @@ var selectedSectionsCodinsee = [];
 var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
-var comsecTDiv = document.getElementById('comsecT');
 var select = document.getElementById('region');
 
+// Fonction pour mettre à jour l'affichage des communes et sections sélectionnées
+function updateSelectedCommunesAndSections() {
+  var comsecTDiv = document.querySelector('.comsecT');
+  comsecTDiv.innerHTML = ''; // Réinitialiser le contenu de la div
 
-function createSelectionDiv(type, item, color) {
-  var div = document.createElement('div');
-  div.className = type + '-selection';
-  div.style.color = color;
-  div.textContent = item.nom + ': ' + item.code;
-  div.addEventListener('click', function () {
-    if (type === 'commune') {
-      clickedCommunes = clickedCommunes.filter(clicked => clicked.code !== item.code);
-    } else {
-      clickedSections = clickedSections.filter(clicked => clicked.code !== item.code);
-    }
-
-    totalVentes -= item.ventes;
-    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-
-    comsecTDiv.removeChild(div);
+  // Afficher les communes sélectionnées
+  selectedCommunesCodinsee.forEach(commune => {
+    var communeSpan = document.createElement('span');
+    communeSpan.textContent = commune.nom + ' (' + commune.code + ') ';
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Supprimer';
+    deleteButton.addEventListener('click', function () {
+      // Supprimer la commune de la liste des communes sélectionnées
+      var index = selectedCommunesCodinsee.indexOf(commune);
+      if (index !== -1) {
+        selectedCommunesCodinsee.splice(index, 1);
+        updateSelectedCommunesAndSections(); // Mettre à jour l'affichage
+      }
+    });
+    communeSpan.appendChild(deleteButton);
+    comsecTDiv.appendChild(communeSpan);
   });
-  return div;
+
+  // Afficher les sections sélectionnées
+  selectedSectionsCodinsee.forEach(section => {
+    var sectionSpan = document.createElement('span');
+    sectionSpan.textContent = section.nom + ' (' + section.code + ') ';
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Supprimer';
+    deleteButton.addEventListener('click', function () {
+      // Supprimer la section de la liste des sections sélectionnées
+      var index = selectedSectionsCodinsee.indexOf(section);
+      if (index !== -1) {
+        selectedSectionsCodinsee.splice(index, 1);
+        updateSelectedCommunesAndSections(); // Mettre à jour l'affichage
+      }
+    });
+    sectionSpan.appendChild(deleteButton);
+    comsecTDiv.appendChild(sectionSpan);
+  });
 }
 
+updateSelectedCommunesAndSections();
+
 document.getElementById('Count').addEventListener('click', function() {
-  comsecTDiv.innerHTML = '';
-  totalVentes = 0;
-
-  clickedCommunes.forEach(commune => {
-    comsecTDiv.appendChild(createSelectionDiv('commune', commune, 'blue'));
-    totalVentes += commune.ventes;
-  });
-
-  clickedSections.forEach(section => {
-    comsecTDiv.appendChild(createSelectionDiv('section', section, 'red'));
-    totalVentes += section.ventes;
-  });
-
-  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+  if (clickedCommunes.length === 0) {
+    totalVentes = 0;
+    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+  }
+  updateSelectedCommunesAndSections();
 });
   
 document.getElementById('Export').addEventListener('click', function() {
@@ -315,17 +328,7 @@ function filterSections(communeCode, sections) {
     return section.properties.id.startsWith(communeCode);
   });
 }
-function onCommuneClick(e) {
-  // ...
-  clickedCommunes.push({ code: communeCode, nom: communeName, ventes: communeVentes });
-  // ...
-}
 
-function onSectionClick(e) {
-  // ...
-  clickedSections.push({ code: sectionCode, nom: sectionName, ventes: sectionVentes });
-  // ...
-}
   // Reset totalVentes and clickedCommunes when reset button is clicked
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
