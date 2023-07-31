@@ -33,11 +33,11 @@ document.getElementById('Count').addEventListener('click', function() {
     comsecTDiv.appendChild(communeInput);
   });
 
-  // Pour chaque section rattachée, créez un nouvel élément input et ajoutez-le à comsecTDiv
-  sectionsRattachees.forEach(section => {
+  // Pour chaque section sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
+  selectedSectionsCodinsee.forEach(section => {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = `${section.nom_section}: ${section.code_section}`;
+    sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
     sectionInput.readOnly = true;  // Rendre l'input en lecture seule
     comsecTDiv.appendChild(sectionInput);
   });

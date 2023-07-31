@@ -33,12 +33,14 @@ document.getElementById('Count').addEventListener('click', function () {
     communeInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(communeInput);
-  }); // Pour chaque section rattachée, créez un nouvel élément input et ajoutez-le à comsecTDiv
+  }); // Pour chaque section sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
 
-  sectionsRattachees.forEach(function (section) {
+  selectedSectionsCodinsee.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = "".concat(section.nom_section, ": ").concat(section.code_section);
+    sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
+      return "".concat(section.nom, ": ").concat(section.code);
+    }).join(', ');
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);
