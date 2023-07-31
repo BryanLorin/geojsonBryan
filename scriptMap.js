@@ -16,56 +16,11 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 
-// Fonction pour mettre à jour l'affichage des communes et sections sélectionnées
-function updateSelectedCommunesAndSections() {
-  var comsecTDiv = document.querySelector('.comsecT');
-  comsecTDiv.innerHTML = ''; // Réinitialiser le contenu de la div
-
-  // Afficher les communes sélectionnées
-  selectedCommunesCodinsee.forEach(commune => {
-    var communeSpan = document.createElement('span');
-    communeSpan.textContent = commune.nom + ' (' + commune.code + ') ';
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.addEventListener('click', function () {
-      // Supprimer la commune de la liste des communes sélectionnées
-      var index = selectedCommunesCodinsee.indexOf(commune);
-      if (index !== -1) {
-        selectedCommunesCodinsee.splice(index, 1);
-        updateSelectedCommunesAndSections(); // Mettre à jour l'affichage
-      }
-    });
-    communeSpan.appendChild(deleteButton);
-    comsecTDiv.appendChild(communeSpan);
-  });
-
-  // Afficher les sections sélectionnées
-  selectedSectionsCodinsee.forEach(section => {
-    var sectionSpan = document.createElement('span');
-    sectionSpan.textContent = section.nom + ' (' + section.code + ') ';
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.addEventListener('click', function () {
-      // Supprimer la section de la liste des sections sélectionnées
-      var index = selectedSectionsCodinsee.indexOf(section);
-      if (index !== -1) {
-        selectedSectionsCodinsee.splice(index, 1);
-        updateSelectedCommunesAndSections(); // Mettre à jour l'affichage
-      }
-    });
-    sectionSpan.appendChild(deleteButton);
-    comsecTDiv.appendChild(sectionSpan);
-  });
-}
-
-updateSelectedCommunesAndSections();
-
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
-  updateSelectedCommunesAndSections();
 });
   
 document.getElementById('Export').addEventListener('click', function() {
@@ -328,7 +283,6 @@ function filterSections(communeCode, sections) {
     return section.properties.id.startsWith(communeCode);
   });
 }
-
   // Reset totalVentes and clickedCommunes when reset button is clicked
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
