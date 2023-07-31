@@ -37,11 +37,12 @@ document.getElementById('Count').addEventListener('click', function() {
   selectedSectionsCodinsee.forEach(section => {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = `Section ${l_section}: ${communesData.features.find(commune => commune.properties.code === l_codinsee).properties.nom}`;
+    sectionInput.value = `Section ${section.code}: ${section.nom}`;
     console.log(sectionInput);
     sectionInput.readOnly = true;  // Rendre l'input en lecture seule
     comsecTDiv.appendChild(sectionInput);
-  });
+});
+
 
   // Votre code existant
   if (clickedCommunes.length === 0) {
