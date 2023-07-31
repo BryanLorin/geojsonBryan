@@ -34,7 +34,8 @@ document.getElementById('Count').addEventListener('click', function() {
   });
 
   // Pour chaque section sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
-  selectedSectionsCodinsee.forEach(section => {
+  console.log(selectedSectionsCodinsee);
+selectedSectionsCodinsee.forEach(section => {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
     sectionInput.value = `Section ${section.code}: ${section.nom}`;
@@ -42,7 +43,6 @@ document.getElementById('Count').addEventListener('click', function() {
     sectionInput.readOnly = true;  // Rendre l'input en lecture seule
     comsecTDiv.appendChild(sectionInput);
 });
-
 
   // Votre code existant
   if (clickedCommunes.length === 0) {

@@ -35,6 +35,7 @@ document.getElementById('Count').addEventListener('click', function () {
     comsecTDiv.appendChild(communeInput);
   }); // Pour chaque section sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
 
+  console.log(selectedSectionsCodinsee);
   selectedSectionsCodinsee.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
