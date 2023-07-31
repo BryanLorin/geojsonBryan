@@ -22,6 +22,10 @@ document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+    var inputContainer = document.getElementById('comsecT'); // Changez ceci avec l'ID de votre conteneur d'inputs
+
+    var communeInput = createInput("".concat(commune.nom, ": ").concat(commune.code));
+    inputContainer.appendChild(communeInput);
   }
 });
 document.getElementById('Export').addEventListener('click', function () {
@@ -134,8 +138,6 @@ select.addEventListener('change', function () {
                       layer.setStyle({
                         fillColor: 'blue'
                       }); // Change la couleur de la commune sélectionnée
-
-                      createInputs(); // Mise à jour des inputs
                     } // Vérifier si la commune a déjà été cliquée
 
 
@@ -204,8 +206,6 @@ select.addEventListener('change', function () {
                                 layer.setStyle({
                                   fillColor: 'green'
                                 }); // Change la couleur de la section sélectionnée
-
-                                createInputs(); // Mise à jour des inputs
                               } // Vérifier si la section a déjà été cliquée
 
 
@@ -267,65 +267,26 @@ function filterSections(communeCode, sections) {
   return sections.features.filter(function (section) {
     return section.properties.id.startsWith(communeCode);
   });
-} // Reset totalVentes, clickedCommunes, and inputs when reset button is clicked
+} // Reset totalVentes and clickedCommunes when reset button is clicked
 
 
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
-  totalSecteur = 0;
   document.getElementById("NumberSell").textContent = "";
-  document.getElementById("TotalSecteur").value = "";
   clickedCommunes.forEach(function (commune) {
     commune.setStyle({
       fillColor: 'blue'
     }); // Replace 'blue' with your original color
   });
   clickedCommunes = [];
-  selectedCommunesCodinsee = [];
-  selectedSectionsCodinsee = [];
-  createInputs(); // Supprimer les inputs existants
 });
 
-function createInputs() {
-  var container = document.getElementById('comsecT');
-  container.innerHTML = '';
-  selectedCommunesCodinsee.forEach(function (selectedCommune) {
-    var input = document.createElement('input');
-    input.type = 'text';
-    input.value = "".concat(selectedCommune.nom, ": ").concat(selectedCommune.code);
-    input.readOnly = true;
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.addEventListener('click', function () {
-      var index = selectedCommunesCodinsee.indexOf(selectedCommune);
+function createInput(value) {
+  var input = document.createElement('input');
+  input.type = 'text';
+  input.value = value;
+  input.readOnly = true; // Rendre l'input en lecture seule
 
-      if (index !== -1) {
-        selectedCommunesCodinsee.splice(index, 1);
-        createInputs();
-      }
-    });
-    container.appendChild(input);
-    container.appendChild(deleteButton);
-    container.appendChild(document.createElement('br'));
-  });
-  selectedSectionsCodinsee.forEach(function (selectedSection) {
-    var input = document.createElement('input');
-    input.type = 'text';
-    input.value = "".concat(selectedSection.nom, ": ").concat(selectedSection.code);
-    input.readOnly = true;
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.addEventListener('click', function () {
-      var index = selectedSectionsCodinsee.indexOf(selectedSection);
-
-      if (index !== -1) {
-        selectedSectionsCodinsee.splice(index, 1);
-        createInputs();
-      }
-    });
-    container.appendChild(input);
-    container.appendChild(deleteButton);
-    container.appendChild(document.createElement('br'));
-  });
+  return input;
 }
 //# sourceMappingURL=scriptMap.dev.js.map
