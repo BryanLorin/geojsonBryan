@@ -18,30 +18,22 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
-var partInput = document.getElementById("Part");
-partInput.addEventListener('input', updateMarketShare);
+var numberSellElement = document.getElementById("NumberSell");
+var partElement = document.getElementById("Part");
+var marketShareElement = document.getElementById("MarketShare"); // Définir une fonction pour mettre à jour la part de marché
 
 function updateMarketShare() {
-  try {
-    var partValue = parseInt(partInput.value);
-    var totalVentes = parseInt(document.getElementById("NumberSell").textContent.split(":")[1].trim());
+  // Obtenir les valeurs actuelles
+  var numberSell = parseInt(numberSellElement.textContent.split(" ")[1]);
+  var part = parseInt(partElement.value); // Effectuer le calcul
 
-    if (isNaN(partValue)) {
-      throw new Error("Invalid input: Please enter a valid number.");
-    }
+  var marketShare = part * 100 / numberSell; // Mettre à jour la valeur de "MarketShare"
 
-    if (totalVentes === 0) {
-      throw new Error("Invalid operation: Total sales is 0.");
-    }
+  marketShareElement.textContent = "Market Share: " + marketShare + "%";
+} // Attacher la fonction d'update à l'événement 'input' de l'élément "Part"
 
-    var marketShare = Math.ceil(partValue * 100 / totalVentes);
-    document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
-    console.log("Market Share:", marketShare);
-  } catch (error) {
-    console.error(error.message);
-  }
-}
 
+partElement.addEventListener('input', updateMarketShare);
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
