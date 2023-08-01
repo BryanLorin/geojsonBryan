@@ -292,26 +292,25 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-document.getElementById('equal').addEventListener('click', function () {
+// Ajouter l'écouteur d'événement à votre bouton "egal marcher"
+document.getElementById('egalmarcher').addEventListener('click', function() {
+  // Obtenir la valeur du champ "nbventesclient" et convertir en nombre
   var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value);
-  var numberSell = parseFloat(document.getElementById('NumberSell').textContent.split(':')[1]);
-
-  // Perform the multiplication and division operations
-  var resultat = (nbVentesClient * numberSell) / 100;
-
   
-
- 
-// Create a new input element to display the result
-  var resultatInput = document.createElement('input');
-  resultatInput.
-  resultat
-type = 'text';
-  resultatInput.value = resultat;
-  resultatInput.
- 
-readOnly = true; // Make the input read-only
+  // Obtenir la valeur du champ "NumberSell" et convertir en nombre
+  var numberSell = parseFloat(document.getElementById('NumberSell').textContent.split(": ")[1]);
   
- 
-document.getElementById('resultatmarcher').appendChild(resultatInput);
+  // Calculer le résultat
+  var result = (nbVentesClient * numberSell) / 100;
+  
+  // Créer un nouvel élément d'input
+  var newInput = document.createElement('input');
+  
+  // Définir les attributs du nouvel élément d'input
+  newInput.type = 'text';
+  newInput.value = result;
+  newInput.readOnly = true;  // Rendre l'input en lecture seule
+  
+  // Ajouter le nouvel élément d'input à la div "resultatmarcher"
+  document.getElementById('resultatmarcher').appendChild(newInput);
 });
