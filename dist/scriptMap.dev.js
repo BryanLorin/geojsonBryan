@@ -20,6 +20,7 @@ var totalSecteur = 0;
 var select = document.getElementById('region');
 document.getElementById("Part").addEventListener('input', function () {
   var partValue = parseFloat(this.value);
+  var totalVentes = parseInt(document.getElementById("NumberSell").textContent.split(":")[1].trim());
   var marketShare = Math.ceil(partValue * 100 / totalVentes);
   document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
 });
