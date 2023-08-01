@@ -22,7 +22,7 @@ var select = document.getElementById('region');
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
-    document.getElementById("NumberSell", "NumberSellform").textContent = "Total: " + totalVentes;
+    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
 });
   
@@ -182,13 +182,14 @@ select.addEventListener('change', function () {
                         if (document.getElementById("Communes").checked) {
                           if (document.getElementById("Count").checked) {
                             totalVentes += Math.round(ventesDansCetteCommune.length / 4);
-                            document.getElementById("NumberSell", "NumberSellform" ).textContent = "Total: " + totalVentes;
+                            document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                            document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
                             layer.setStyle({ fillColor: 'red' });
                             clickedCommunes.push(layer);
                         } else {
                             totalVentes = Math.round(ventesDansCetteCommune.length / 4);
-                            document.getElementById("NumberSell", "NumberSellform").textContent = "Total: " + totalVentes;
-        
+                            document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                            document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
                         }
                       }                        
 
@@ -251,12 +252,14 @@ select.addEventListener('change', function () {
 
                                     if (document.getElementById("Count").checked) {
                                       totalVentes += Math.round(ventesDansCetteSection.length / 4);
-                                      document.getElementById("NumberSell", "NumberSellform").textContent = "Total: " + totalVentes;
+                                      document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                                      document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
                                       layer.setStyle({ fillColor: 'red' });
                                       clickedSections.push(layer);
                                   } else {
                                       totalVentes = Math.round(ventesDansCetteSection.length / 4);
-                                      document.getElementById("NumberSell", "NumberSellform").textContent = "Total: " + totalVentes;
+                                      document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                                      document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
                                   }
                                   
                                   });
@@ -290,7 +293,7 @@ function filterSections(communeCode, sections) {
   // Reset totalVentes and clickedCommunes when reset button is clicked
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
-  document.getElementById("NumberSell", "NumberSellform").textContent = "";
+  document.getElementById("NumberSell").textContent = "";
   clickedCommunes.forEach(function (commune) {
     commune.setStyle({ fillColor: 'blue' });  // Replace 'blue' with your original color
   });
