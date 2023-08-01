@@ -292,15 +292,9 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-document.getElementById('nbventesclient').addEventListener('input', function () {
-  var nbVentesClient = parseFloat(this.value);
-  var numberSellValue = parseFloat(document.getElementById('NumberSell').textContent.split(' ')[1]); // Extract the value from the "NumberSell" TextBlock
-
-  if (!isNaN(nbVentesClient) && !isNaN(numberSellValue)) {
-    var result = (nbVentesClient * numberSellValue) / 100;
-    document.getElementById('resultatmarcher').textContent = result.toString();
-  } else {
-    // Handle the case where the input values are not numbers
-    document.getElementById('resultatmarcher').textContent = "Invalid input";
-  }
+document.getElementById('egal').addEventListener('click', function() {
+  var nbventesclientValue = parseFloat(document.getElementById('nbventesclient').value);
+  var NumberSellValue = parseFloat(document.getElementById('NumberSell').textContent.split('Total: ')[1]);
+  var resultat = (nbventesclientValue * NumberSellValue) / 100;
+  document.getElementById('resultatmarcher').textContent = resultat;
 });
