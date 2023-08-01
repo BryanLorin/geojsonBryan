@@ -276,14 +276,21 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-document.getElementById('nbventesclient').addEventListener('change', function () {
-  // Récupérer le nombre de ventes
-  var numbersell = parseInt(document.getElementById("NumberSell").textContent.replace("Total: ", "")); // Récupérer la valeur de l'input
+var NumberSell2 = document.getElementById('NumberSell2');
+var resultatmarcher = document.getElementById('resultatmarcher'); // Initialisation de NumberSell2 avec la valeur de NumberSell
 
-  var inputValue = parseInt(this.value); // Calculer le résultat
+NumberSell2.textContent = document.getElementById("NumberSell").textContent; // Mise à jour de NumberSell2 quand NumberSell change
 
-  var result = inputValue * numbersell / 100; // Afficher le résultat dans le textblock "resultatmarcher"
+document.getElementById("NumberSell").addEventListener('DOMSubtreeModified', function () {
+  NumberSell2.textContent = this.textContent;
+}); // Gestion de l'entrée dans le champ de texte 'nbventesclient'
 
-  document.getElementById("resultatmarcher").textContent = "Résultat : " + result.toFixed(2); // Utiliser toFixed(2) pour limiter à 2 chiffres après la virgule
+document.getElementById('nbventesclient').addEventListener('input', function () {
+  var totalVentes = parseInt(NumberSell2.textContent.split(': ')[1]);
+  var nbventesclient = parseInt(this.value); // Calcul du résultat
+
+  var result = totalVentes * nbventesclient / 100; // Affichage du résultat dans 'resultatmarcher'
+
+  resultatmarcher.textContent = result;
 });
 //# sourceMappingURL=scriptMap.dev.js.map
