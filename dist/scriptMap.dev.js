@@ -189,19 +189,7 @@ select.addEventListener('change', function () {
                               var sectionID = feature.properties.id; // Extraire le l_codinsee et l_section de l'ID de la section
 
                               var l_codinsee = sectionID.substring(0, 5);
-                              var l_section = sectionID.substring(8); // Check if Count is checked
-
-                              if (document.getElementById("Count").checked) {
-                                // Assuming 'comsecT' is the id of your div
-                                var comsecTDiv = document.getElementById('comsecT'); // Extract information from the section
-
-                                var sectionID = feature.properties.id;
-                                var l_codinsee = sectionID.substring(0, 5);
-                                var l_section = sectionID.substring(8); // Add information to the div
-
-                                var sectionInformation = 'ID: ' + sectionID + ', Codinsee: ' + l_codinsee + ', Section: ' + l_section;
-                                comsecTDiv.textContent = sectionInformation;
-                              }
+                              var l_section = sectionID.substring(8);
 
                               if (document.getElementById("Create").checked) {
                                 var section = {
@@ -287,5 +275,15 @@ document.getElementById("reset").addEventListener('click', function () {
     }); // Replace 'blue' with your original color
   });
   clickedCommunes = [];
+});
+document.getElementById('nbventesclient').addEventListener('input', function (e) {
+  var inputVal = e.target.value;
+
+  if (!isNaN(inputVal) && inputVal.trim() !== '') {
+    // Assurez-vous que la valeur entrée est un nombre
+    var result = inputVal * NumberSell / 100; // Calculez le résultat
+
+    document.getElementById('resultatmarcher').innerText = result; // Mettez à jour le TextBlock avec le résultat
+  }
 });
 //# sourceMappingURL=scriptMap.dev.js.map
