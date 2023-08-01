@@ -43,10 +43,11 @@ document.getElementById('Count').addEventListener('click', function() {
     comsecTDiv.appendChild(communeInput);
   });
 
-  selectedSectionsCodinsee.forEach(section => {
+  // Faire la même chose pour les sections
+  clickedSections.forEach(section => {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
+    sectionInput.value = `${section.nom}: ${section.code}`;
     sectionInput.readOnly = true;  // Rendre l'input en lecture seule
     comsecTDiv.appendChild(sectionInput);
     console.log('Input créé pour section: ', sectionInput);
@@ -55,11 +56,12 @@ document.getElementById('Count').addEventListener('click', function() {
   console.log('Etat de comsecTDiv après ajout des sections: ', comsecTDiv.innerHTML);
 
   // Votre code existant
-  if (clickedCommunes.length === 0) {
+  if (clickedCommunes.length === 0 && clickedSections.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
 });
+
   
 document.getElementById('Export').addEventListener('click', function() {
   // Récupérer le conteneur d'input
@@ -76,13 +78,11 @@ document.getElementById('Export').addEventListener('click', function() {
   inputContainer.appendChild(communesInput);
 
   // Créer un nouvel input pour les sections sélectionnées
-  clickedSections.forEach(section => {
-    var sectionInput = document.createElement('input');
-    sectionInput.type = 'text';
-    sectionInput.value = `${section.nom}: ${section.code}`;
-    sectionInput.readOnly = true;  // Rendre l'input en lecture seule
-    comsecTDiv.appendChild(sectionInput);
-  });
+  var sectionsInput = document.createElement('input');
+  sectionsInput.type = 'text';
+  sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
+  sectionsInput.readOnly = true;  // Rendre l'input en lecture seule
+  inputContainer.appendChild(sectionsInput);
 
 
   // Calculate totalVentes for selected communes

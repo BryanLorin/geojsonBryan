@@ -43,13 +43,12 @@ document.getElementById('Count').addEventListener('click', function () {
     communeInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(communeInput);
-  });
-  selectedSectionsCodinsee.forEach(function (section) {
+  }); // Faire la même chose pour les sections
+
+  clickedSections.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = selectedSectionsCodinsee.map(function (section) {
-      return "".concat(section.nom, ": ").concat(section.code);
-    }).join(', ');
+    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);
@@ -57,7 +56,7 @@ document.getElementById('Count').addEventListener('click', function () {
   });
   console.log('Etat de comsecTDiv après ajout des sections: ', comsecTDiv.innerHTML); // Votre code existant
 
-  if (clickedCommunes.length === 0) {
+  if (clickedCommunes.length === 0 && clickedSections.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
@@ -77,14 +76,14 @@ document.getElementById('Export').addEventListener('click', function () {
 
   inputContainer.appendChild(communesInput); // Créer un nouvel input pour les sections sélectionnées
 
-  clickedSections.forEach(function (section) {
-    var sectionInput = document.createElement('input');
-    sectionInput.type = 'text';
-    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
-    sectionInput.readOnly = true; // Rendre l'input en lecture seule
+  var sectionsInput = document.createElement('input');
+  sectionsInput.type = 'text';
+  sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
+    return "".concat(section.nom, ": ").concat(section.code);
+  }).join(', ');
+  sectionsInput.readOnly = true; // Rendre l'input en lecture seule
 
-    comsecTDiv.appendChild(sectionInput);
-  }); // Calculate totalVentes for selected communes
+  inputContainer.appendChild(sectionsInput); // Calculate totalVentes for selected communes
 
   selectedCommunesCodinsee.forEach(function (selectedCommune) {
     var ventesDansCetteCommune = ventes.flatMap(function (vente) {
