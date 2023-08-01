@@ -15,12 +15,16 @@ var selectedSectionsCodinsee = [];
 var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
-var select = document.getElementById('region'); // ajout de l'écouteur d'événements pour récupérer le total des ventes
-
+var select = document.getElementById('region');
 document.getElementById('NumberSell').addEventListener('input', function () {
-  var partValue = document.getElementById('Part').value;
-  var marketShare = partValue * 100 / this.value;
-  document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
+  try {
+    var partValue = document.getElementById('Part').value;
+    var marketShare = partValue * 100 / this.value;
+    document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
+    console.log("Market Share: " + marketShare.toFixed(2) + "%"); // Log the result to the console
+  } catch (error) {
+    console.error("An error occurred: ", error);
+  }
 });
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
