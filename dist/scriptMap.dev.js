@@ -77,14 +77,14 @@ document.getElementById('Export').addEventListener('click', function () {
 
   inputContainer.appendChild(communesInput); // Créer un nouvel input pour les sections sélectionnées
 
-  var sectionsInput = document.createElement('input');
-  sectionsInput.type = 'text';
-  sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
-    return "".concat(section.nom, ": ").concat(section.code);
-  }).join(', ');
-  sectionsInput.readOnly = true; // Rendre l'input en lecture seule
+  clickedSections.forEach(function (section) {
+    var sectionInput = document.createElement('input');
+    sectionInput.type = 'text';
+    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
+    sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
-  inputContainer.appendChild(sectionsInput); // Calculate totalVentes for selected communes
+    comsecTDiv.appendChild(sectionInput);
+  }); // Calculate totalVentes for selected communes
 
   selectedCommunesCodinsee.forEach(function (selectedCommune) {
     var ventesDansCetteCommune = ventes.flatMap(function (vente) {

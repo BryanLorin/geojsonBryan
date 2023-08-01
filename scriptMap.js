@@ -76,11 +76,13 @@ document.getElementById('Export').addEventListener('click', function() {
   inputContainer.appendChild(communesInput);
 
   // Créer un nouvel input pour les sections sélectionnées
-  var sectionsInput = document.createElement('input');
-  sectionsInput.type = 'text';
-  sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
-  sectionsInput.readOnly = true;  // Rendre l'input en lecture seule
-  inputContainer.appendChild(sectionsInput);
+  clickedSections.forEach(section => {
+    var sectionInput = document.createElement('input');
+    sectionInput.type = 'text';
+    sectionInput.value = `${section.nom}: ${section.code}`;
+    sectionInput.readOnly = true;  // Rendre l'input en lecture seule
+    comsecTDiv.appendChild(sectionInput);
+  });
 
 
   // Calculate totalVentes for selected communes
