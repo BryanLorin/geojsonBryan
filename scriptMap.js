@@ -106,16 +106,15 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
     // Effectuer les opérations de multiplication et de division
     var resultat = (nbventesclient * totalVentes) / 100;
 
-    // Créer un nouvel input pour afficher le résultat dans la div "resultatmarcher"
-    var resultatInput = document.createElement('input');
-    resultatInput.type = 'text';
-    resultatInput.value = resultat;
-    resultatInput.readOnly = true;
-    document.getElementById('resultatmarcher').appendChild(resultatInput);
+    // Afficher le résultat dans le textblock "resultatmarcher"
+    var resultatTextblock = document.createElement('p');
+    resultatTextblock.textContent = "Résultat : " + resultat;
+    document.getElementById('resultatmarcher').appendChild(resultatTextblock);
   } else {
     alert('Veuillez entrer un nombre valide dans le champ "nbventesclient".');
   }
 });
+
 
 select.addEventListener('change', function () {
   var region = this.value;

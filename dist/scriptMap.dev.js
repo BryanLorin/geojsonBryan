@@ -92,13 +92,11 @@ document.getElementById('egalmarcher').addEventListener('click', function () {
 
   if (!isNaN(nbventesclient)) {
     // Effectuer les opérations de multiplication et de division
-    var resultat = nbventesclient * totalVentes / 100; // Créer un nouvel input pour afficher le résultat dans la div "resultatmarcher"
+    var resultat = nbventesclient * totalVentes / 100; // Afficher le résultat dans le textblock "resultatmarcher"
 
-    var resultatInput = document.createElement('input');
-    resultatInput.type = 'text';
-    resultatInput.value = resultat;
-    resultatInput.readOnly = true;
-    document.getElementById('resultatmarcher').appendChild(resultatInput);
+    var resultatTextblock = document.createElement('p');
+    resultatTextblock.textContent = "Résultat : " + resultat;
+    document.getElementById('resultatmarcher').appendChild(resultatTextblock);
   } else {
     alert('Veuillez entrer un nombre valide dans le champ "nbventesclient".');
   }
