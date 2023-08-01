@@ -20,6 +20,7 @@ document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+    document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
   }
 });
   
@@ -297,4 +298,3 @@ function filterSections(communeCode, sections) {
     });
     clickedCommunes = [];
 });
-console.log(NumberSell2);

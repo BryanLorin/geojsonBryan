@@ -22,6 +22,7 @@ document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+    document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
   }
 });
 document.getElementById('Export').addEventListener('click', function () {
@@ -279,5 +280,4 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-console.log(NumberSell2);
 //# sourceMappingURL=scriptMap.dev.js.map
