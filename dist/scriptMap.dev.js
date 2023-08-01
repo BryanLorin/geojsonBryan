@@ -19,7 +19,7 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 var numberSellElement = document.getElementById("NumberSell");
-var partElement = document.getElementById("PartInput");
+var partElement = document.getElementById("Part");
 var marketShareElement = document.getElementById("MarketShare"); // Définir une fonction pour mettre à jour la part de marché
 
 function updateMarketShare() {
