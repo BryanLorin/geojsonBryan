@@ -292,7 +292,7 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-document.getElementById("part").addEventListener('input', function () {
+document.getElementById("Part").addEventListener('input', function () {
   var partValue = parseFloat(this.value);
   var marketShare = Math.ceil((partValue * 100) / totalVentes);
   document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
