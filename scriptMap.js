@@ -15,9 +15,9 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
-
+console.log("Event listener for 'egalmarcher' button added.");
 document.getElementById('egalmarcher').addEventListener('click', function() {
-  console.log("Button 'egalmarcher' clicked!");
+  
   // Retrieve the user input from the 'nbventesclient' text field
   var userInput = parseFloat(document.getElementById('nbventesclient').value);
 
