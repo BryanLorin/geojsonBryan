@@ -85,22 +85,6 @@ document.getElementById('Export').addEventListener('click', function () {
 
   document.getElementById("TotalSecteur").value = totalSecteur;
 });
-document.getElementById('egalmarcher').addEventListener('click', function () {
-  // Récupérer le nombre de ventes du client
-  var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value); // Créer un nouvel input pour le résultat
-
-  var resultatInput = document.createElement('input');
-  resultatInput.type = 'text';
-  resultatInput.value = nbVentesClient; // Assigner le nombre de ventes du client comme valeur de l'input
-
-  resultatInput.readOnly = true; // Rendre l'input en lecture seule
-  // Supprimer le contenu actuel de la div 'resultatmarcher'
-
-  var resultatDiv = document.getElementById('resultatmarcher');
-  resultatDiv.innerHTML = ''; // Ajouter le nouvel input à la div 'resultatmarcher'
-
-  resultatDiv.appendChild(resultatInput);
-});
 select.addEventListener('change', function () {
   var region = this.value;
   map.eachLayer(function (layer) {
@@ -179,6 +163,8 @@ select.addEventListener('change', function () {
                       if (document.getElementById("Count").checked) {
                         totalVentes += Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                        document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
+
                         layer.setStyle({
                           fillColor: 'red'
                         });
@@ -186,6 +172,7 @@ select.addEventListener('change', function () {
                       } else {
                         totalVentes = Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                        document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
                       }
                     }
 
@@ -245,6 +232,8 @@ select.addEventListener('change', function () {
                               if (document.getElementById("Count").checked) {
                                 totalVentes += Math.round(ventesDansCetteSection.length / 4);
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                                document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
+
                                 layer.setStyle({
                                   fillColor: 'red'
                                 });
@@ -252,6 +241,7 @@ select.addEventListener('change', function () {
                               } else {
                                 totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                                document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
                               }
                             });
                           }
