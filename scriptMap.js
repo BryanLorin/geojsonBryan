@@ -271,6 +271,8 @@ select.addEventListener('change', function () {
       }).addTo(map);
     });
 });
+
+
 document.getElementById("Part").addEventListener('input', function () {
   var partValue = parseFloat(this.value);
   var marketShare = Math.ceil((partValue * 100) / totalVentes);
