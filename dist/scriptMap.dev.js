@@ -19,16 +19,14 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 var numberSellElement = document.getElementById("NumberSell");
-var partElement = document.getElementById("Part");
+var partElement = document.getElementById("PartInput");
 var marketShareElement = document.getElementById("MarketShare"); // Définir une fonction pour mettre à jour la part de marché
 
 function updateMarketShare() {
-  // Obtenir les valeurs actuelles
   var numberSell = parseInt(numberSellElement.textContent.split(" ")[1]);
-  var part = parseInt(partElement.value); // Effectuer le calcul
+  var part = parseFloat(partElement.value); // Changer parseInt par parseFloat
 
-  var marketShare = part * 100 / numberSell; // Mettre à jour la valeur de "MarketShare"
-
+  var marketShare = part * 100 / numberSell;
   marketShareElement.textContent = "Market Share: " + marketShare + "%";
 } // Attacher la fonction d'update à l'événement 'input' de l'élément "Part"
 
