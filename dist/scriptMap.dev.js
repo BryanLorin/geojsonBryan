@@ -87,15 +87,12 @@ document.getElementById('Export').addEventListener('click', function () {
 });
 document.getElementById('egalmarcher').addEventListener('click', function () {
   // Récupérer le nombre de ventes du client
-  var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value); // Récupérer le nombre total de ventes
-
-  var totalVentes = totalVentes; // Calculer le résultat
-
-  var resultat = nbVentesClient * totalVentes / 100; // Créer un nouvel input pour le résultat
+  var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value); // Créer un nouvel input pour le résultat
 
   var resultatInput = document.createElement('input');
   resultatInput.type = 'text';
-  resultatInput.value = resultat;
+  resultatInput.value = nbVentesClient; // Assigner le nombre de ventes du client comme valeur de l'input
+
   resultatInput.readOnly = true; // Rendre l'input en lecture seule
   // Supprimer le contenu actuel de la div 'resultatmarcher'
 
