@@ -273,10 +273,17 @@ select.addEventListener('change', function () {
 });
 
 
-document.getElementById("Part").addEventListener('input', function () {
+document.getElementById("Part").addEventListener("input", function () {
   var partValue = parseFloat(this.value);
-  var marketShare = Math.ceil((partValue * 100) / totalVentes);
-  document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
+  var marketShare = 0;
+
+  // Check if the totalVentes value is not zero to avoid division by zero
+  if (totalVentes !== 0) {
+    marketShare = Math.ceil((partValue * 100) / totalVentes);
+  }
+
+  document.getElementById("MarketShare").textContent =
+    "Part de marché : " + marketShare + "%";
 });
 
 function filterCommunes(departementCode, communes) {
