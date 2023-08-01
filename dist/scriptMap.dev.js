@@ -25,27 +25,34 @@ document.getElementById('Count').addEventListener('click', function () {
   } // Récupérer la div avec l'id "comsecT"
 
 
-  var comsecTDiv = document.getElementById('comsecT'); // Supprimer les anciens inputs
+  var comsecTDiv = document.getElementById('comsecT'); // Supprimer les anciens éléments de la div "comsecT"
 
-  comsecTDiv.innerHTML = ''; // Créer un nouvel input pour les sections sélectionnées
+  comsecTDiv.innerHTML = ''; // Créer un nouvel élément <p> pour afficher les noms des sections sélectionnées
 
-  var sectionsInput = document.createElement('input');
-  sectionsInput.type = 'text';
-  sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
+  var sectionsNames = selectedSectionsCodinsee.map(function (section) {
     return section.nom;
-  }).join(', '); // Afficher uniquement le nom des sections
-
-  sectionsInput.readOnly = true; // Rendre l'input en lecture seule
-
-  comsecTDiv.appendChild(sectionsInput); // Afficher les informations de la première section sélectionnée dans la div "comsecT"
+  }).join(', ');
+  var sectionsInfo = document.createElement('p');
+  sectionsInfo.textContent = "Sections sélectionnées : " + sectionsNames;
+  comsecTDiv.appendChild(sectionsInfo); // Afficher les informations de la première section sélectionnée dans la div "comsecT"
 
   if (selectedSectionsCodinsee.length > 0) {
-    var selectedSection = selectedSectionsCodinsee[0];
-    var sectionInfo = document.createElement('p');
-    sectionInfo.textContent = "Informations de la section s\xE9lectionn\xE9e : Nom: ".concat(selectedSection.nom, ", Code: ").concat(selectedSection.code);
-    comsecTDiv.appendChild(sectionInfo);
-  }
-});
+    displaySelectedSectionInfo(selectedSectionsCodinsee[0]);
+  } // Autres actions à effectuer lorsque le bouton "Count" est cliqué...
+
+}); // Fonction pour afficher les informations d'une section sélectionnée dans la div "comsecT"
+
+function displaySelectedSectionInfo(selectedSection) {
+  var comsecTDiv = document.getElementById('comsecT'); // Créer des éléments HTML pour afficher les informations de la section
+
+  var sectionNom = document.createElement('p');
+  sectionNom.textContent = 'Nom de la section: ' + selectedSection.nom;
+  comsecTDiv.appendChild(sectionNom);
+  var sectionCode = document.createElement('p');
+  sectionCode.textContent = 'Code de la section: ' + selectedSection.code;
+  comsecTDiv.appendChild(sectionCode); // Ajouter d'autres informations si nécessaire
+}
+
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input
   var inputContainer = document.querySelector('.pop-up-form .input-container'); // Supprimer les anciens inputs
