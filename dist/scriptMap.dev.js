@@ -37,6 +37,7 @@ document.getElementById('Count').addEventListener('click', function () {
   sectionsInput.readOnly = true; // Rendre l'input en lecture seule
 
   comsecTDiv.appendChild(sectionsInput);
+  console.log(sectionsInput);
 });
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input

@@ -35,7 +35,8 @@ document.getElementById('Count').addEventListener('click', function() {
   sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
   sectionsInput.readOnly = true;  // Rendre l'input en lecture seule
   comsecTDiv.appendChild(sectionsInput);
-
+  console.log(sectionsInput);
+  
 });
   
 document.getElementById('Export').addEventListener('click', function() {
