@@ -19,11 +19,25 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 document.getElementById("Part").addEventListener('input', function () {
-  var partValue = parseInt(this.value); // Use parseInt instead of parseFloat
+  try {
+    var partValue = parseInt(this.value); // Use parseInt instead of parseFloat
 
-  var totalVentes = parseInt(document.getElementById("NumberSell").textContent.split(":")[1].trim());
-  var marketShare = Math.ceil(partValue * 100 / totalVentes);
-  document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
+    var totalVentes = parseInt(document.getElementById("NumberSell").textContent.split(":")[1].trim());
+
+    if (isNaN(partValue)) {
+      throw new Error("Invalid input: Please enter a valid number.");
+    }
+
+    if (totalVentes === 0) {
+      throw new Error("Invalid operation: Total sales is 0.");
+    }
+
+    var marketShare = Math.ceil(partValue * 100 / totalVentes);
+    document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
+    console.log("Market Share:", marketShare);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
