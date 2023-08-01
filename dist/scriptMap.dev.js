@@ -163,7 +163,7 @@ select.addEventListener('change', function () {
                       if (document.getElementById("Count").checked) {
                         totalVentes += Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                        document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
+                        document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
 
                         layer.setStyle({
                           fillColor: 'red'
@@ -172,7 +172,7 @@ select.addEventListener('change', function () {
                       } else {
                         totalVentes = Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                        document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
+                        document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
                       }
                     }
 
@@ -232,7 +232,7 @@ select.addEventListener('change', function () {
                               if (document.getElementById("Count").checked) {
                                 totalVentes += Math.round(ventesDansCetteSection.length / 4);
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
+                                document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
 
                                 layer.setStyle({
                                   fillColor: 'red'
@@ -241,7 +241,7 @@ select.addEventListener('change', function () {
                               } else {
                                 totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                document.getElementById("NumberSellform").value = totalVentes; // Ajout de cette ligne
+                                document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
                               }
                             });
                           }
