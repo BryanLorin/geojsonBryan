@@ -19,7 +19,8 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 document.getElementById('egalmarcher').addEventListener('click', function () {
-  // Retrieve the user input from the 'nbventesclient' text field
+  console.log("Button 'egalmarcher' clicked!"); // Retrieve the user input from the 'nbventesclient' text field
+
   var userInput = parseFloat(document.getElementById('nbventesclient').value); // Perform the multiplication and division operations
 
   var result = userInput * totalVentes / 100; // Log the result to the console for debugging
