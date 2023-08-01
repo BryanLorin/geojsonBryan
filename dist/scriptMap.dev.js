@@ -18,10 +18,12 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
-document.getElementById("Part").addEventListener('input', function () {
-  try {
-    var partValue = parseInt(this.value); // Use parseInt instead of parseFloat
+var partInput = document.getElementById("Part");
+partInput.addEventListener('input', updateMarketShare);
 
+function updateMarketShare() {
+  try {
+    var partValue = parseInt(partInput.value);
     var totalVentes = parseInt(document.getElementById("NumberSell").textContent.split(":")[1].trim());
 
     if (isNaN(partValue)) {
@@ -38,7 +40,8 @@ document.getElementById("Part").addEventListener('input', function () {
   } catch (error) {
     console.error(error.message);
   }
-});
+}
+
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
