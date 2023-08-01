@@ -22,37 +22,8 @@ document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-  } // Récupérer la div avec l'id "comsecT"
-
-
-  var comsecTDiv = document.getElementById('comsecT'); // Supprimer les anciens éléments de la div "comsecT"
-
-  comsecTDiv.innerHTML = ''; // Créer un nouvel élément <p> pour afficher les noms des sections sélectionnées
-
-  var sectionsNames = selectedSectionsCodinsee.map(function (section) {
-    return section.nom;
-  }).join(', ');
-  var sectionsInfo = document.createElement('p');
-  sectionsInfo.textContent = "Sections sélectionnées : " + sectionsNames;
-  comsecTDiv.appendChild(sectionsInfo); // Afficher les informations de la première section sélectionnée dans la div "comsecT"
-
-  if (selectedSectionsCodinsee.length > 0) {
-    displaySelectedSectionInfo(selectedSectionsCodinsee[0]);
-  } // Autres actions à effectuer lorsque le bouton "Count" est cliqué...
-
-}); // Fonction pour afficher les informations d'une section sélectionnée dans la div "comsecT"
-
-function displaySelectedSectionInfo(selectedSection) {
-  var comsecTDiv = document.getElementById('comsecT'); // Créer des éléments HTML pour afficher les informations de la section
-
-  var sectionNom = document.createElement('p');
-  sectionNom.textContent = 'Nom de la section: ' + selectedSection.nom;
-  comsecTDiv.appendChild(sectionNom);
-  var sectionCode = document.createElement('p');
-  sectionCode.textContent = 'Code de la section: ' + selectedSection.code;
-  comsecTDiv.appendChild(sectionCode); // Ajouter d'autres informations si nécessaire
-}
-
+  }
+});
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input
   var inputContainer = document.querySelector('.pop-up-form .input-container'); // Supprimer les anciens inputs
