@@ -20,7 +20,6 @@ document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-    document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
   }
 });
   
@@ -182,13 +181,11 @@ select.addEventListener('change', function () {
                           if (document.getElementById("Count").checked) {
                             totalVentes += Math.round(ventesDansCetteCommune.length / 4);
                             document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                            document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
                             layer.setStyle({ fillColor: 'red' });
                             clickedCommunes.push(layer);
                           } else {
                             totalVentes = Math.round(ventesDansCetteCommune.length / 4);
                             document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                            document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
                           }
                         }
 
@@ -252,14 +249,11 @@ select.addEventListener('change', function () {
                                     if (document.getElementById("Count").checked) {
                                       totalVentes += Math.round(ventesDansCetteSection.length / 4);
                                       document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                      document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
-                                      
                                       layer.setStyle({ fillColor: 'red' });
                                       clickedSections.push(layer);
                                     } else {
                                       totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                       document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                      document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
                                     }
                                   });
                                 },
@@ -293,17 +287,21 @@ function filterSections(communeCode, sections) {
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
   document.getElementById("NumberSell").textContent = "";
-  document.getElementById("NumberSell2").textContent = "";
   clickedCommunes.forEach(function (commune) {
     commune.setStyle({ fillColor: 'blue' });  // Replace 'blue' with your original color
   });
   clickedCommunes = [];
 });
-
-document.getElementById('nbventesclient').addEventListener('input', function(e) {
-  var inputVal = e.target.value;
-  if (!isNaN(inputVal) && inputVal.trim() !== '') { // Assurez-vous que la valeur entrée est un nombre
-    var result = (inputVal * NumberSell2) / 100; // Calculez le résultat
-    document.getElementById('resultatmarcher').innerText = result; // Mettez à jour le TextBlock avec le résultat
-  }
+document.getElementById('nbventesclient').addEventListener('change', function() {
+  // Récupérer le nombre de ventes
+  var numbersell = parseInt(document.getElementById("NumberSell").textContent.replace("Total: ", ""));
+  
+  // Récupérer la valeur de l'input
+  var inputValue = parseInt(this.value);
+  
+  // Calculer le résultat
+  var result = (inputValue * numbersell) / 100;
+  
+  // Afficher le résultat dans le textblock "resultatmarcher"
+  document.getElementById("resultatmarcher").textContent = "Résultat : " + result.toFixed(2); // Utiliser toFixed(2) pour limiter à 2 chiffres après la virgule
 });
