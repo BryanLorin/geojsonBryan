@@ -34,6 +34,7 @@ document.getElementById('egalmarcher').addEventListener('click', function () {
   resultatDiv.innerHTML = ''; // Clear any previous inputs
 
   resultatDiv.appendChild(resultatInput);
+  console.log(resultatInput);
 });
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {

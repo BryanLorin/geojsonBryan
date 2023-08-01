@@ -33,6 +33,8 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
   var resultatDiv = document.getElementById('resultatmarcher');
   resultatDiv.innerHTML = ''; // Clear any previous inputs
   resultatDiv.appendChild(resultatInput);
+
+  console.log(resultatInput);
 });
 
 document.getElementById('Count').addEventListener('click', function() {
