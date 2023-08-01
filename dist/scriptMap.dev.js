@@ -277,8 +277,8 @@ document.getElementById("reset").addEventListener('click', function () {
   clickedCommunes = [];
 });
 document.getElementById('egalmarcher').addEventListener('click', function () {
-  var nbventesclient = document.getElementById('nbventesclient').value;
-  var NumberSell = document.getElementById('NumberSell').value;
+  var nbventesclient = parseFloat(document.getElementById('nbventesclient').value);
+  var NumberSell = parseFloat(document.getElementById('NumberSell').value);
   var result = nbventesclient * NumberSell / 100;
   var input = document.createElement("input");
   input.value = result;
