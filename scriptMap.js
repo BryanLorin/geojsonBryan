@@ -89,6 +89,7 @@ document.getElementById('Export').addEventListener('click', function() {
 
 
   // Calculate totalVentes for selected communes
+  console.log(selectedSectionsCodinsee);
   selectedCommunesCodinsee.forEach(selectedCommune => {
     var ventesDansCetteCommune = ventes.flatMap(vente => {
       var venteCommunes = JSON.parse(vente.l_codinsee.replace(/'/g, "\""));
