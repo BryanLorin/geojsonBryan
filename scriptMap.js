@@ -101,7 +101,7 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
   var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value);
 
   // Récupérer le nombre total de ventes
-  var totalVentes = parseFloat(document.getElementById('NumberSell').textContent.split(": ")[1]);
+  var totalVentes = totalVentes;
 
   // Calculer le résultat
   var resultat = (nbVentesClient * totalVentes) / 100;
