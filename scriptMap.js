@@ -16,6 +16,12 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 
+document.getElementById("Part").addEventListener('input', function () {
+  var partValue = parseFloat(this.value);
+  var marketShare = Math.ceil((partValue * 100) / totalVentes);
+  document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
+});
+
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
@@ -273,18 +279,7 @@ select.addEventListener('change', function () {
 });
 
 
-document.getElementById("Part").addEventListener("input", function () {
-  var partValue = parseFloat(this.value);
-  var marketShare = 0;
 
-  // Check if the totalVentes value is not zero to avoid division by zero
-  if (totalVentes !== 0) {
-    marketShare = Math.ceil((partValue * 100) / totalVentes);
-  }
-
-  document.getElementById("MarketShare").textContent =
-    "Part de marché : " + marketShare + "%";
-});
 
 function filterCommunes(departementCode, communes) {
   return communes.features.filter(function (commune) {
