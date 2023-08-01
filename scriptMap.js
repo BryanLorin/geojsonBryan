@@ -106,8 +106,18 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
   // Calculer le résultat
   var resultat = (nbVentesClient * totalVentes) / 100;
 
-  // Afficher le résultat
-  document.getElementById('resultatmarcher').textContent = resultat;
+  // Créer un nouvel input pour le résultat
+  var resultatInput = document.createElement('input');
+  resultatInput.type = 'text';
+  resultatInput.value = resultat;
+  resultatInput.readOnly = true;  // Rendre l'input en lecture seule
+
+  // Supprimer le contenu actuel de la div 'resultatmarcher'
+  var resultatDiv = document.getElementById('resultatmarcher');
+  resultatDiv.innerHTML = '';
+
+  // Ajouter le nouvel input à la div 'resultatmarcher'
+  resultatDiv.appendChild(resultatInput);
 });
 
 select.addEventListener('change', function () {
