@@ -249,6 +249,7 @@ select.addEventListener('change', function () {
                               } else {
                                 totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                 totalVentes2 = Math.round(ventesDansCetteSection.length / 4);
+                                document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
                                 document.getElementById("NumberSell2").textContent = "Total: " + totalVentes2;
                               }
                             });
