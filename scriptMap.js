@@ -20,7 +20,9 @@ var select = document.getElementById('region');
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
+    totalVentes2;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+    document.getElementById("NumberSell2").textContent = "Total: " + totalVentes2;
   }
 });
   
