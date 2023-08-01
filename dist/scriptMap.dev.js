@@ -24,7 +24,8 @@ var marketShareText = document.getElementById('MarketShare'); // Ajouter un gest
 
 partInput.addEventListener('input', function () {
   // Obtenir la valeur actuelle de l'input "Part" et convertir en nombre
-  var partValue = Number(partInput.value); // Obtenir le total de vente
+  var partValue = Number(partInput.value);
+  console.log("Part Value: ", partValue); // Obtenir le total de vente
 
   var totalVentes = Number(document.getElementById("NumberSell").textContent.split(": ")[1]); // Calculer la part de marché
 
@@ -176,6 +177,8 @@ select.addEventListener('change', function () {
                     if (document.getElementById("Communes").checked) {
                       if (document.getElementById("Count").checked) {
                         totalVentes += Math.round(ventesDansCetteCommune.length / 4);
+                        console.log("Total Ventes after adding: ", totalVentes); // Ici
+
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
                         layer.setStyle({
                           fillColor: 'red'
