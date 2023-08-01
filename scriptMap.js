@@ -23,7 +23,7 @@ var marketShareElement = document.getElementById("MarketShare");
 // Définir une fonction pour mettre à jour la part de marché
 function updateMarketShare() {
   var numberSell = parseInt(numberSellElement.textContent.split(" ")[1]);
-  var part = parseFloat(partElement.value);  // Changer parseInt par parseFloat
+  var part = parseInt(partElement.value);  
 
   var marketShare = (part * 100) / numberSell;
   marketShareElement.textContent = "Market Share: " + marketShare + "%";
