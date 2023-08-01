@@ -293,12 +293,20 @@ document.getElementById("reset").addEventListener('click', function () {
   clickedCommunes = [];
 });
 document.getElementById('egalmarcher').addEventListener('click', function() {
-  var nbventesclient = parseFloat(document.getElementById('nbventesclient').value);
-  var NumberSell = parseFloat(document.getElementById('NumberSell').value);
-  var result = (nbventesclient * NumberSell) / 100;
+  // Get the input value from the 'nbventesclient' text field
+  var nbventesclientValue = parseFloat(document.getElementById('nbventesclient').value);
 
-  var input = document.createElement("input");
-  input.value = result;
-  input.readOnly = true; // Rend l'input en lecture seule (non modifiable)
-  document.getElementById('resultatmarcher').appendChild(input);
+  // Calculate the result as (nbventesclient * totalVentes) / 100
+  var resultat = (nbventesclientValue * totalVentes) / 100;
+
+  // Create a new input element
+  var resultatInput = document.createElement('input');
+  resultatInput.type = 'text';
+  resultatInput.value = resultat;
+  resultatInput.readOnly = true; // Set the input to read-only
+
+  // Append the new input element to the 'resultatmarcher' div
+  var resultatDiv = document.getElementById('resultatmarcher');
+  resultatDiv.innerHTML = ''; // Clear any previous inputs
+  resultatDiv.appendChild(resultatInput);
 });
