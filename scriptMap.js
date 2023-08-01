@@ -23,6 +23,9 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
   // Perform the multiplication and division operations
   var result = (userInput * totalVentes) / 100;
 
+  // Log the result to the console for debugging
+  console.log("Result:", result);
+
   // Create a new input element to display the result
   var resultInput = document.createElement('input');
   resultInput.type = 'text';

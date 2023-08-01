@@ -22,7 +22,9 @@ document.getElementById('egalmarcher').addEventListener('click', function () {
   // Retrieve the user input from the 'nbventesclient' text field
   var userInput = parseFloat(document.getElementById('nbventesclient').value); // Perform the multiplication and division operations
 
-  var result = userInput * totalVentes / 100; // Create a new input element to display the result
+  var result = userInput * totalVentes / 100; // Log the result to the console for debugging
+
+  console.log("Result:", result); // Create a new input element to display the result
 
   var resultInput = document.createElement('input');
   resultInput.type = 'text';
