@@ -47,7 +47,9 @@ document.getElementById('Count').addEventListener('click', function () {
   selectedSectionsCodinsee.forEach(function (section) {
     var sectionInput = document.createElement('input');
     sectionInput.type = 'text';
-    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
+    sectionInput.value = selectedSectionsCodinsee.map(function (section) {
+      return "".concat(section.nom, ": ").concat(section.code);
+    }).join(', ');
     sectionInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(sectionInput);
