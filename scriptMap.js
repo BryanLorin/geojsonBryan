@@ -16,26 +16,10 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 
-var numberSellElement = document.getElementById("NumberSell");
-var partElement = document.getElementById("Part");
-var marketShareElement = document.getElementById("MarketShare");
-
-// Définir une fonction pour mettre à jour la part de marché
-function updateMarketShare() {
-  var numberSell = parseInt(numberSellElement.textContent.split(" ")[1]);
-  var part = parseInt(partElement.value);  
-
-  var marketShare = (part * 100) / numberSell;
-  marketShareElement.textContent = "Market Share: " + marketShare + "%";
-}
-// Attacher la fonction d'update à l'événement 'input' de l'élément "Part"
-partElement.addEventListener('input', updateMarketShare);
-
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-    updateMarketShare();
   }
 });
   
@@ -197,13 +181,11 @@ select.addEventListener('change', function () {
                           if (document.getElementById("Count").checked) {
                             totalVentes += Math.round(ventesDansCetteCommune.length / 4);
                             document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                            updateMarketShare();
                             layer.setStyle({ fillColor: 'red' });
                             clickedCommunes.push(layer);
                           } else {
                             totalVentes = Math.round(ventesDansCetteCommune.length / 4);
                             document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                            updateMarketShare();
                           }
                         }
 
@@ -267,13 +249,11 @@ select.addEventListener('change', function () {
                                     if (document.getElementById("Count").checked) {
                                       totalVentes += Math.round(ventesDansCetteSection.length / 4);
                                       document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                      updateMarketShare();
                                       layer.setStyle({ fillColor: 'red' });
                                       clickedSections.push(layer);
                                     } else {
                                       totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                       document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                      updateMarketShare();
                                     }
                                   });
                                 },
