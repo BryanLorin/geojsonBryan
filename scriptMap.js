@@ -292,9 +292,26 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-document.getElementById('egal').addEventListener('click', function() {
-  var nbventesclientValue = parseFloat(document.getElementById('nbventesclient').value);
-  var NumberSellValue = parseFloat(document.getElementById('NumberSell').textContent.split('Total: ')[1]);
-  var resultat = (nbventesclientValue * NumberSellValue) / 100;
-  document.getElementById('resultatmarcher').textContent = resultat;
+document.getElementById('equal').addEventListener('click', function () {
+  var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value);
+  var numberSell = parseFloat(document.getElementById('NumberSell').textContent.split(':')[1]);
+
+  // Perform the multiplication and division operations
+  var resultat = (nbVentesClient * numberSell) / 100;
+
+  
+
+ 
+// Create a new input element to display the result
+  var resultatInput = document.createElement('input');
+  resultatInput.
+  resultat
+type = 'text';
+  resultatInput.value = resultat;
+  resultatInput.
+ 
+readOnly = true; // Make the input read-only
+  
+ 
+document.getElementById('resultatmarcher').appendChild(resultatInput);
 });
