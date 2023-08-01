@@ -16,6 +16,26 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 
+// Obtenir l'input "Part" et le texte "MarketShare"
+var partInput = document.getElementById('Part');
+var marketShareText = document.getElementById('MarketShare');
+
+// Ajouter un gestionnaire d'événements input à l'input "Part"
+partInput.addEventListener('input', function() {
+    // Obtenir la valeur actuelle de l'input "Part" et convertir en nombre
+    var partValue = Number(partInput.value);
+
+    // Obtenir le total de vente
+    var totalVentes = Number(document.getElementById("NumberSell").textContent.split(": ")[1]);
+
+    // Calculer la part de marché
+    var marketShare = (partValue * 100) / totalVentes;
+
+    // Mettre à jour le texte "MarketShare"
+    marketShareText.textContent = marketShare.toFixed(2) + '%';  // .toFixed(2) pour avoir deux chiffres après la virgule
+});
+
+
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
