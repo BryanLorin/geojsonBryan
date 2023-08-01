@@ -32,9 +32,17 @@ document.getElementById('Count').addEventListener('click', function() {
   // Créer un nouvel input pour les sections sélectionnées
   var sectionsInput = document.createElement('input');
   sectionsInput.type = 'text';
-  sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', '); // Afficher uniquement le nom des sections
+  sectionsInput.value = selectedSectionsCodinsee.map(section => section.nom).join(', '); // Afficher uniquement le nom des sections
   sectionsInput.readOnly = true;  // Rendre l'input en lecture seule
   comsecTDiv.appendChild(sectionsInput);
+
+  // Afficher les informations de la première section sélectionnée dans la div "comsecT"
+  if (selectedSectionsCodinsee.length > 0) {
+    var selectedSection = selectedSectionsCodinsee[0];
+    var sectionInfo = document.createElement('p');
+    sectionInfo.textContent = `Informations de la section sélectionnée : Nom: ${selectedSection.nom}, Code: ${selectedSection.code}`;
+    comsecTDiv.appendChild(sectionInfo);
+  }
 });
   
 document.getElementById('Export').addEventListener('click', function() {

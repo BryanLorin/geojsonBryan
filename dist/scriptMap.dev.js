@@ -32,12 +32,19 @@ document.getElementById('Count').addEventListener('click', function () {
   var sectionsInput = document.createElement('input');
   sectionsInput.type = 'text';
   sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
-    return "".concat(section.nom, ": ").concat(section.code);
+    return section.nom;
   }).join(', '); // Afficher uniquement le nom des sections
 
   sectionsInput.readOnly = true; // Rendre l'input en lecture seule
 
-  comsecTDiv.appendChild(sectionsInput);
+  comsecTDiv.appendChild(sectionsInput); // Afficher les informations de la première section sélectionnée dans la div "comsecT"
+
+  if (selectedSectionsCodinsee.length > 0) {
+    var selectedSection = selectedSectionsCodinsee[0];
+    var sectionInfo = document.createElement('p');
+    sectionInfo.textContent = "Informations de la section s\xE9lectionn\xE9e : Nom: ".concat(selectedSection.nom, ", Code: ").concat(selectedSection.code);
+    comsecTDiv.appendChild(sectionInfo);
+  }
 });
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input
