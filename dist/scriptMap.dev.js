@@ -19,6 +19,14 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 document.getElementById('Count').addEventListener('click', function () {
+  var comsecT = document.getElementById('comsecT'); // Reset comsecT's content
+
+  comsecT.textContent = ''; // Ajoutez les informations sur les sections sélectionnées dans comsecT
+
+  selectedSectionsCodinsee.forEach(function (section) {
+    comsecT.textContent += "Nom: ".concat(section.nom, ", Code: ").concat(section.code, "\n");
+  });
+
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
