@@ -43,24 +43,27 @@ document.getElementById('Count').addEventListener('click', function() {
     comsecTDiv.appendChild(communeInput);
   });
 
-  // Faire la même chose pour les sections
-  clickedSections.forEach(section => {
-    var sectionInput = document.createElement('input');
-    sectionInput.type = 'text';
-    sectionInput.value = `${section.nom}: ${section.code}`;
-    sectionInput.readOnly = true;  // Rendre l'input en lecture seule
-    comsecTDiv.appendChild(sectionInput);
-    console.log('Input créé pour section: ', sectionInput);
-  });
-  
-  console.log('Etat de comsecTDiv après ajout des sections: ', comsecTDiv.innerHTML);
+  // Créer un nouvel input pour les sections sélectionnées
+  var sectionsInput = document.createElement('input');
+  sectionsInput.type = 'text';
+  sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
+  sectionsInput.readOnly = true;  // Rendre l'input en lecture seule
+  comsecTDiv.appendChild(sectionsInput);
+});
+
+// Votre code existant
+if (clickedSections.length === 0) {
+  totalVentes = 0;
+  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+}
+
+
 
   // Votre code existant
-  if (clickedCommunes.length === 0 && clickedSections.length === 0) {
+  if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
   }
-});
 
   
 document.getElementById('Export').addEventListener('click', function() {

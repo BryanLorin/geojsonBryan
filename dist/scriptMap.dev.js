@@ -43,24 +43,29 @@ document.getElementById('Count').addEventListener('click', function () {
     communeInput.readOnly = true; // Rendre l'input en lecture seule
 
     comsecTDiv.appendChild(communeInput);
-  }); // Faire la même chose pour les sections
+  }); // Créer un nouvel input pour les sections sélectionnées
 
-  clickedSections.forEach(function (section) {
-    var sectionInput = document.createElement('input');
-    sectionInput.type = 'text';
-    sectionInput.value = "".concat(section.nom, ": ").concat(section.code);
-    sectionInput.readOnly = true; // Rendre l'input en lecture seule
+  var sectionsInput = document.createElement('input');
+  sectionsInput.type = 'text';
+  sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
+    return "".concat(section.nom, ": ").concat(section.code);
+  }).join(', ');
+  sectionsInput.readOnly = true; // Rendre l'input en lecture seule
 
-    comsecTDiv.appendChild(sectionInput);
-    console.log('Input créé pour section: ', sectionInput);
-  });
-  console.log('Etat de comsecTDiv après ajout des sections: ', comsecTDiv.innerHTML); // Votre code existant
+  comsecTDiv.appendChild(sectionsInput);
+}); // Votre code existant
 
-  if (clickedCommunes.length === 0 && clickedSections.length === 0) {
-    totalVentes = 0;
-    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-  }
-});
+if (clickedSections.length === 0) {
+  totalVentes = 0;
+  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+} // Votre code existant
+
+
+if (clickedCommunes.length === 0) {
+  totalVentes = 0;
+  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+}
+
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input
   var inputContainer = document.querySelector('.pop-up-form .input-container'); // Supprimer les anciens inputs
