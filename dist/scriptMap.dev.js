@@ -36,6 +36,7 @@ document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+    updateMarketShare();
   }
 });
 document.getElementById('Export').addEventListener('click', function () {
@@ -177,6 +178,7 @@ select.addEventListener('change', function () {
                       if (document.getElementById("Count").checked) {
                         totalVentes += Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                        updateMarketShare();
                         layer.setStyle({
                           fillColor: 'red'
                         });
@@ -184,6 +186,7 @@ select.addEventListener('change', function () {
                       } else {
                         totalVentes = Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                        updateMarketShare();
                       }
                     }
 
@@ -243,6 +246,7 @@ select.addEventListener('change', function () {
                               if (document.getElementById("Count").checked) {
                                 totalVentes += Math.round(ventesDansCetteSection.length / 4);
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                                updateMarketShare();
                                 layer.setStyle({
                                   fillColor: 'red'
                                 });
@@ -250,6 +254,7 @@ select.addEventListener('change', function () {
                               } else {
                                 totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                                updateMarketShare();
                               }
                             });
                           }
