@@ -17,6 +17,7 @@ var selectedSectionsCodinsee = [];
 var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
+var totalVentes2 = 0;
 var select = document.getElementById('region');
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
@@ -162,8 +163,10 @@ select.addEventListener('change', function () {
                     if (document.getElementById("Communes").checked) {
                       if (document.getElementById("Count").checked) {
                         totalVentes += Math.round(ventesDansCetteCommune.length / 4);
+                        totalVentes2 += Math.round(ventesDansCetteCommune.length / 4); // Ajout de cette ligne
+
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                        document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
+                        document.getElementById("NumberSell2").textContent = "Total: " + totalVentes2; // Ajout de cette ligne
 
                         layer.setStyle({
                           fillColor: 'red'
@@ -171,8 +174,9 @@ select.addEventListener('change', function () {
                         clickedCommunes.push(layer);
                       } else {
                         totalVentes = Math.round(ventesDansCetteCommune.length / 4);
+                        totalVentes2 += Math.round(ventesDansCetteCommune.length / 4);
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                        document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
+                        document.getElementById("NumberSell2").textContent = "Total: " + totalVentes2;
                       }
                     }
 
@@ -231,8 +235,10 @@ select.addEventListener('change', function () {
 
                               if (document.getElementById("Count").checked) {
                                 totalVentes += Math.round(ventesDansCetteSection.length / 4);
+                                totalVentes2 += Math.round(ventesDansCetteSection.length / 4); // Ajout de cette ligne
+
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
+                                document.getElementById("NumberSell2").textContent = "Total: " + totalVentes2; // Ajout de cette ligne
 
                                 layer.setStyle({
                                   fillColor: 'red'
@@ -240,8 +246,8 @@ select.addEventListener('change', function () {
                                 clickedSections.push(layer);
                               } else {
                                 totalVentes = Math.round(ventesDansCetteSection.length / 4);
-                                document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                document.getElementById("NumberSellform").textContent = totalVentes; // Ajout de cette ligne
+                                totalVentes2 = Math.round(ventesDansCetteSection.length / 4);
+                                document.getElementById("NumberSell2").textContent = "Total: " + totalVentes2;
                               }
                             });
                           }
@@ -274,7 +280,11 @@ function filterSections(communeCode, sections) {
 
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
+  totalVentes2 = 0; // Ajout de cette ligne
+
   document.getElementById("NumberSell").textContent = "";
+  document.getElementById("NumberSell2").textContent = ""; // Ajout de cette ligne
+
   clickedCommunes.forEach(function (commune) {
     commune.setStyle({
       fillColor: 'blue'
