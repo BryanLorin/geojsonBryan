@@ -276,4 +276,25 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
+document.getElementById('egalmarcher').addEventListener('click', function () {
+  // Récupérer le nombre dans le champ nbventesclients
+  var nombreVentes = parseFloat(document.getElementById('nbventesclients').value); // Vérifier si le nombre est valide
+
+  if (isNaN(nombreVentes)) {
+    alert('Veuillez entrer un nombre valide dans le champ nbventesclients.');
+    return;
+  } // Récupérer le total des ventes
+
+
+  var totalVentes = parseFloat(document.getElementById('NumberSell').textContent.split(": ")[1]); // Calculer le résultat
+
+  var resultat = totalVentes * nombreVentes / 100; // Créer un nouvel élément input
+
+  var inputResultat = document.createElement('input');
+  inputResultat.type = 'text';
+  inputResultat.readOnly = true;
+  inputResultat.value = resultat; // Ajouter le nouvel élément input à la div resultatmarcher
+
+  document.getElementById('resultatmarcher').appendChild(inputResultat);
+});
 //# sourceMappingURL=scriptMap.dev.js.map
