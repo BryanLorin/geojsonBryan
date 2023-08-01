@@ -34,6 +34,7 @@ document.getElementById('nbVentesClient').addEventListener('input', function () 
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
+    totalVentes2 = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
     document.getElementById("NumberSell2").textContent = "Total 2: " + totalVentes2;
   }
@@ -175,7 +176,9 @@ select.addEventListener('change', function () {
 
                     if (document.getElementById("Communes").checked) {
                       if (document.getElementById("Count").checked) {
-                        totalVentes += Math.round(ventesDansCetteCommune.length / 4);
+                        var tempVentes = Math.round(ventesDansCetteSection.length / 4);
+                        totalVentes += tempVentes;
+                        totalVentes2 += tempVentes;
                         document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
                         document.getElementById("NumberSell2").textContent = "Total 2: " + totalVentes2;
                         layer.setStyle({
@@ -243,7 +246,9 @@ select.addEventListener('change', function () {
                               });
 
                               if (document.getElementById("Count").checked) {
-                                totalVentes += Math.round(ventesDansCetteSection.length / 4);
+                                var tempVentes = Math.round(ventesDansCetteSection.length / 4);
+                                totalVentes += tempVentes;
+                                totalVentes2 += tempVentes;
                                 document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
                                 document.getElementById("NumberSell2").textContent = "Total 2: " + totalVentes2;
                                 layer.setStyle({
