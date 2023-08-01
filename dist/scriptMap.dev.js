@@ -275,23 +275,15 @@ document.getElementById("reset").addEventListener('click', function () {
     }); // Replace 'blue' with your original color
   });
   clickedCommunes = [];
-}); // Ajouter l'écouteur d'événement à votre bouton "egal marcher"
-
+});
 document.getElementById('egalmarcher').addEventListener('click', function () {
-  // Obtenir la valeur du champ "nbventesclient" et convertir en nombre
-  var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value); // Obtenir la valeur du champ "NumberSell" et convertir en nombre
+  var nbventesclient = document.getElementById('nbventesclient').value;
+  var NumberSell = document.getElementById('NumberSell').value;
+  var result = nbventesclient * NumberSell / 100;
+  var input = document.createElement("input");
+  input.value = result;
+  input.readOnly = true; // Rend l'input en lecture seule (non modifiable)
 
-  var numberSell = parseFloat(document.getElementById('NumberSell').textContent.split(": ")[1]); // Calculer le résultat
-
-  var result = nbVentesClient * numberSell / 100; // Créer un nouvel élément d'input
-
-  var newInput = document.createElement('input'); // Définir les attributs du nouvel élément d'input
-
-  newInput.type = 'text';
-  newInput.value = result;
-  newInput.readOnly = true; // Rendre l'input en lecture seule
-  // Ajouter le nouvel élément d'input à la div "resultatmarcher"
-
-  document.getElementById('resultatmarcher').appendChild(newInput);
+  document.getElementById('resultatmarcher').appendChild(input);
 });
 //# sourceMappingURL=scriptMap.dev.js.map
