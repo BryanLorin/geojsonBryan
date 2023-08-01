@@ -1,15 +1,5 @@
 "use strict";
 
-window.onload = function () {
-  if (window.location.href.indexOf('reload') == -1) {
-    window.location.href = window.location.href + '?reload';
-  } else {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = window.location.href.replace('?reload', '');
-  }
-};
-
 var map = L.map('map').setView([45.7, 3.15], 7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19
@@ -28,44 +18,12 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
-var comsecTDiv = document.getElementById('comsecT');
 document.getElementById('Count').addEventListener('click', function () {
-  // Supprimez tous les enfants de comsecTDiv
-  while (comsecTDiv.firstChild) {
-    comsecTDiv.removeChild(comsecTDiv.firstChild);
-  } // Pour chaque commune sélectionnée, créez un nouvel élément input et ajoutez-le à comsecTDiv
-
-
-  selectedCommunesCodinsee.forEach(function (commune) {
-    var communeInput = document.createElement('input');
-    communeInput.type = 'text';
-    communeInput.value = "".concat(commune.nom, ": ").concat(commune.code);
-    communeInput.readOnly = true; // Rendre l'input en lecture seule
-
-    comsecTDiv.appendChild(communeInput);
-  }); // Créer un nouvel input pour les sections sélectionnées
-
-  var sectionsInput = document.createElement('input');
-  sectionsInput.type = 'text';
-  sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
-    return "".concat(section.nom, ": ").concat(section.code);
-  }).join(', ');
-  sectionsInput.readOnly = true; // Rendre l'input en lecture seule
-
-  comsecTDiv.appendChild(sectionsInput);
-}); // Votre code existant
-
-if (clickedSections.length === 0) {
-  totalVentes = 0;
-  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-} // Votre code existant
-
-
-if (clickedCommunes.length === 0) {
-  totalVentes = 0;
-  document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-}
-
+  if (clickedCommunes.length === 0) {
+    totalVentes = 0;
+    document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+  }
+});
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input
   var inputContainer = document.querySelector('.pop-up-form .input-container'); // Supprimer les anciens inputs
@@ -90,7 +48,6 @@ document.getElementById('Export').addEventListener('click', function () {
 
   inputContainer.appendChild(sectionsInput); // Calculate totalVentes for selected communes
 
-  console.log(selectedSectionsCodinsee);
   selectedCommunesCodinsee.forEach(function (selectedCommune) {
     var ventesDansCetteCommune = ventes.flatMap(function (vente) {
       var venteCommunes = JSON.parse(vente.l_codinsee.replace(/'/g, "\""));
