@@ -17,23 +17,22 @@ var totalSecteur = 0;
 var select = document.getElementById('region');
 
 document.getElementById('egalmarcher').addEventListener('click', function() {
-  // Get the input value from the 'nbventesclient' text field
-  var nbventesclientValue = parseFloat(document.getElementById('nbventesclient').value);
+  // Retrieve the user input from the 'nbventesclient' text field
+  var userInput = parseFloat(document.getElementById('nbventesclient').value);
 
-  // Calculate the result as (nbventesclient * totalVentes) / 100
-  var resultat = (nbventesclientValue * totalVentes) / 100;
-  console.log('Résultat du calcul :', resultat);
+  // Perform the multiplication and division operations
+  var result = (userInput * totalVentes) / 100;
 
-  // Create a new input element for the result
-  var resultatInput = document.createElement('input');
-  resultatInput.type = 'text';
-  resultatInput.value = resultat;
-  resultatInput.readOnly = true; // Set the input to read-only
+  // Create a new input element to display the result
+  var resultInput = document.createElement('input');
+  resultInput.type = 'text';
+  resultInput.value = result.toFixed(2); // Display the result with two decimal places
+  resultInput.readOnly = true; // Make the input read-only
 
   // Append the new input element to the 'resultatmarcher' div
-  var resultatDiv = document.getElementById('resultatmarcher');
-  resultatDiv.innerHTML = ''; // Clear any previous inputs
-  resultatDiv.appendChild(resultatInput);
+  var resultatmarcherDiv = document.getElementById('resultatmarcher');
+  resultatmarcherDiv.innerHTML = ''; // Clear previous content, if any
+  resultatmarcherDiv.appendChild(resultInput);
 });
 
 document.getElementById('Count').addEventListener('click', function() {
