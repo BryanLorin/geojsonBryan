@@ -279,4 +279,5 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
+console.log(NumberSell2);
 //# sourceMappingURL=scriptMap.dev.js.map

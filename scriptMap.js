@@ -297,3 +297,4 @@ function filterSections(communeCode, sections) {
     });
     clickedCommunes = [];
 });
+console.log(NumberSell2);
