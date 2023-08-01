@@ -27,6 +27,17 @@ document.getElementById('NumberSell').addEventListener('input', function() {
   }
 });
 
+document.getElementById('Part').addEventListener('input', function() {
+  try {
+    let numberSellValue = document.getElementById('NumberSell').value;
+    let marketShare = (this.value * 100) / numberSellValue;
+    document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
+    console.log("Market Share: " + marketShare.toFixed(2) + "%"); // Log the result to the console
+  } catch (error) {
+    console.error("An error occurred: ", error);
+  }
+});
+
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
