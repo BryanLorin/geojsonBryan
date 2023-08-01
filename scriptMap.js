@@ -1,3 +1,13 @@
+window.onload = function() {
+  if(window.location.href.indexOf('reload')==-1) {
+    window.location.href=window.location.href+'?reload';
+  } else {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href=window.location.href.replace('?reload','');
+  }
+}
+
 var map = L.map('map').setView([45.7, 3.15], 7);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
