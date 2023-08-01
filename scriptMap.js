@@ -7,8 +7,8 @@ var communesData;
 var ventes;
 var totalVentes = 0;
 var clickedCommunes = [];
-var clickedSections = [];  
-var historyDiv = document.getElementById('Historique'); 
+var clickedSections = [];  // Ajout du tableau pour stocker les sections cliquées
+var historyDiv = document.getElementById('Historique');  // Ajout de la div Historique
 var selectedCommunesCodinsee = [];
 var selectedSectionsCodinsee = [];
 var communesLayer;
@@ -16,20 +16,24 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 
-function calculateMarketShare() {
-  try {
-    let numberSellText = document.getElementById('NumberSell').textContent;
-    let numberSellValue = parseFloat(numberSellText.replace("Total: ", "")); // Get the displayed total of sales
-    let partValue = parseFloat(document.getElementById('Part').value);
-    let marketShare = (partValue * 100) / numberSellValue;
-    document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
-    console.log("Market Share: " + marketShare.toFixed(2) + "%"); // Log the result to the console
-  } catch (error) {
-    console.error("An error occurred: ", error);
-  }
-}
+document.getElementById('Part').addEventListener('input', function() {
+  // Récupérer la valeur de l'input "Part"
+  var partValue = parseFloat(this.value);
 
-document.getElementById('Part').addEventListener('input', calculateMarketShare);
+  // Vérifier si "Part" est un nombre valide
+  if (!isNaN(partValue)) {
+    // Récupérer le total des ventes
+    var totalVentes = parseFloat(document.getElementById('NumberSell').textContent.replace('Total: ', ''));
+
+    // Calculer le résultat et l'afficher dans le "text block" avec l'ID "MarketShare"
+    var marketShare = (partValue * 100) / totalVentes;
+    document.getElementById('MarketShare').textContent = 'Market Share: ' + marketShare.toFixed(2) + '%';
+  } else {
+    // Si "Part" n'est pas un nombre valide, afficher un message d'erreur ou laisser le "text block" vide
+    document.getElementById('MarketShare').textContent = 'Market Share: -';
+  }
+});
+
 
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
