@@ -84,22 +84,16 @@ document.getElementById('Export').addEventListener('click', function () {
   }); // Display the total sales
 
   document.getElementById("TotalSecteur").value = totalSecteur;
-}); // Ajouter un événement "click" au bouton "egalmarcher"
-
+});
 document.getElementById('egalmarcher').addEventListener('click', function () {
-  // Récupérer le nombre saisi dans le champ "nbventesclient"
-  var nbventesclient = parseFloat(document.getElementById('nbventesclient').value); // Vérifier si le nombre saisi est valide
+  // Récupérer le nombre de ventes du client
+  var nbVentesClient = parseFloat(document.getElementById('nbventesclient').value); // Récupérer le nombre total de ventes
 
-  if (!isNaN(nbventesclient)) {
-    // Effectuer les opérations de multiplication et de division
-    var resultat = nbventesclient * totalVentes / 100; // Afficher le résultat dans le textblock "resultatmarcher"
+  var totalVentes = parseFloat(document.getElementById('NumberSell').textContent.split(": ")[1]); // Calculer le résultat
 
-    var resultatTextblock = document.createElement('p');
-    resultatTextblock.textContent = "Résultat : " + resultat;
-    document.getElementById('resultatmarcher').innerHTML = "Résultat : " + resultat;
-  } else {
-    alert('Veuillez entrer un nombre valide dans le champ "nbventesclient".');
-  }
+  var resultat = nbVentesClient * totalVentes / 100; // Afficher le résultat
+
+  document.getElementById('resultatmarcher').textContent = resultat;
 });
 select.addEventListener('change', function () {
   var region = this.value;
