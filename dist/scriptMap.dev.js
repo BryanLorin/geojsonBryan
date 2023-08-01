@@ -22,26 +22,21 @@ document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-  } else {
-    // Créer un nouvel input pour les communes sélectionnées
-    var communesInput = document.createElement('input');
-    communesInput.type = 'text';
-    communesInput.value = selectedCommunesCodinsee.map(function (commune) {
-      return "".concat(commune.nom, ": ").concat(commune.code);
-    }).join(', ');
-    communesInput.readOnly = true; // Rendre l'input en lecture seule
+  } // Récupérer la div avec l'id "comsecT"
 
-    historyDiv.appendChild(communesInput); // Créer un nouvel input pour les sections sélectionnées
 
-    var sectionsInput = document.createElement('input');
-    sectionsInput.type = 'text';
-    sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
-      return "".concat(section.nom, ": ").concat(section.code);
-    }).join(', ');
-    sectionsInput.readOnly = true; // Rendre l'input en lecture seule
+  var comsecTDiv = document.getElementById('comsecT'); // Supprimer les anciens inputs
 
-    historyDiv.appendChild(sectionsInput);
-  }
+  comsecTDiv.innerHTML = ''; // Créer un nouvel input pour les sections sélectionnées
+
+  var sectionsInput = document.createElement('input');
+  sectionsInput.type = 'text';
+  sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
+    return "".concat(section.nom, ": ").concat(section.code);
+  }).join(', ');
+  sectionsInput.readOnly = true; // Rendre l'input en lecture seule
+
+  comsecTDiv.appendChild(sectionsInput);
 });
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input
