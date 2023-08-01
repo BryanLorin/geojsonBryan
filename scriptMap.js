@@ -22,6 +22,7 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
 
   // Calculate the result as (nbventesclient * totalVentes) / 100
   var resultat = (nbventesclientValue * totalVentes) / 100;
+  console.log('Résultat du calcul :', resultat);
 
   // Create a new input element for the result
   var resultatInput = document.createElement('input');
@@ -33,8 +34,6 @@ document.getElementById('egalmarcher').addEventListener('click', function() {
   var resultatDiv = document.getElementById('resultatmarcher');
   resultatDiv.innerHTML = ''; // Clear any previous inputs
   resultatDiv.appendChild(resultatInput);
-
-  console.log(resultatInput);
 });
 
 document.getElementById('Count').addEventListener('click', function() {

@@ -22,7 +22,8 @@ document.getElementById('egalmarcher').addEventListener('click', function () {
   // Get the input value from the 'nbventesclient' text field
   var nbventesclientValue = parseFloat(document.getElementById('nbventesclient').value); // Calculate the result as (nbventesclient * totalVentes) / 100
 
-  var resultat = nbventesclientValue * totalVentes / 100; // Create a new input element for the result
+  var resultat = nbventesclientValue * totalVentes / 100;
+  console.log('Résultat du calcul :', resultat); // Create a new input element for the result
 
   var resultatInput = document.createElement('input');
   resultatInput.type = 'text';
@@ -34,7 +35,6 @@ document.getElementById('egalmarcher').addEventListener('click', function () {
   resultatDiv.innerHTML = ''; // Clear any previous inputs
 
   resultatDiv.appendChild(resultatInput);
-  console.log(resultatInput);
 });
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
