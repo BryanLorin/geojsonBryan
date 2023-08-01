@@ -271,6 +271,11 @@ select.addEventListener('change', function () {
       }).addTo(map);
     });
 });
+document.getElementById("Part").addEventListener('input', function () {
+  var partValue = parseFloat(this.value);
+  var marketShare = Math.ceil((partValue * 100) / totalVentes);
+  document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
+});
 
 function filterCommunes(departementCode, communes) {
   return communes.features.filter(function (commune) {
@@ -291,9 +296,4 @@ document.getElementById("reset").addEventListener('click', function () {
     commune.setStyle({ fillColor: 'blue' });  // Replace 'blue' with your original color
   });
   clickedCommunes = [];
-});
-document.getElementById("Part").addEventListener('input', function () {
-  var partValue = parseFloat(this.value);
-  var marketShare = Math.ceil((partValue * 100) / totalVentes);
-  document.getElementById("MarketShare").textContent = "Part de marché : " + marketShare + "%";
 });
