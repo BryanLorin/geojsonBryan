@@ -7,14 +7,22 @@ var communesData;
 var ventes;
 var totalVentes = 0;
 var clickedCommunes = [];
-var clickedSections = [];  // Ajout du tableau pour stocker les sections cliquées
-var historyDiv = document.getElementById('Historique');  // Ajout de la div Historique
+var clickedSections = [];  
+var historyDiv = document.getElementById('Historique'); 
 var selectedCommunesCodinsee = [];
 var selectedSectionsCodinsee = [];
 var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
+
+// ajout de l'écouteur d'événements pour récupérer le total des ventes
+document.getElementById('NumberSell').addEventListener('input', function() {
+  let partValue = document.getElementById('Part').value;
+  let marketShare = (partValue * 100) / this.value;
+  document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
+});
+
 
 document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
@@ -292,30 +300,3 @@ document.getElementById("reset").addEventListener('click', function () {
   });
   clickedCommunes = [];
 });
-
-document.getElementById('egalmarcher').addEventListener('click', function() {
-  // Récupérer le nombre dans le champ nbventesclients
-  var nombreVentes = parseFloat(document.getElementById('nbventesclients').value);
-
-  // Vérifier si le nombre est valide
-  if(isNaN(nombreVentes)) {
-      alert('Veuillez entrer un nombre valide dans le champ nbventesclients.');
-      return;
-  }
-
-  // Récupérer le total des ventes
-  var totalVentes = parseFloat(document.getElementById('NumberSell').textContent.split(": ")[1]);
-
-  // Calculer le résultat
-  var resultat = (totalVentes * nombreVentes) / 100;
-
-  // Créer un nouvel élément input
-  var inputResultat = document.createElement('input');
-  inputResultat.type = 'text';
-  inputResultat.readOnly = true;
-  inputResultat.value = resultat;
-
-  // Ajouter le nouvel élément input à la div resultatmarcher
-  document.getElementById('resultatmarcher').appendChild(inputResultat);
-});
-
