@@ -96,7 +96,7 @@ document.getElementById('egalmarcher').addEventListener('click', function () {
 
     var resultatTextblock = document.createElement('p');
     resultatTextblock.textContent = "Résultat : " + resultat;
-    document.getElementById('resultatmarcher').appendChild(resultatTextblock);
+    document.getElementById('resultatmarcher').innerHTML = "Résultat : " + resultat;
   } else {
     alert('Veuillez entrer un nombre valide dans le champ "nbventesclient".');
   }
