@@ -19,14 +19,6 @@ var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
 document.getElementById('Count').addEventListener('click', function () {
-  var comsecT = document.getElementById('comsecT'); // Reset comsecT's content
-
-  comsecT.textContent = ''; // Ajoutez les informations sur les sections sélectionnées dans comsecT
-
-  selectedSectionsCodinsee.forEach(function (section) {
-    comsecT.textContent += "Nom: ".concat(section.nom, ", Code: ").concat(section.code, "\n");
-  });
-
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
@@ -197,7 +189,19 @@ select.addEventListener('change', function () {
                               var sectionID = feature.properties.id; // Extraire le l_codinsee et l_section de l'ID de la section
 
                               var l_codinsee = sectionID.substring(0, 5);
-                              var l_section = sectionID.substring(8);
+                              var l_section = sectionID.substring(8); // Check if Count is checked
+
+                              if (document.getElementById("Count").checked) {
+                                // Assuming 'comsecT' is the id of your div
+                                var comsecTDiv = document.getElementById('comsecT'); // Extract information from the section
+
+                                var sectionID = feature.properties.id;
+                                var l_codinsee = sectionID.substring(0, 5);
+                                var l_section = sectionID.substring(8); // Add information to the div
+
+                                var sectionInformation = 'ID: ' + sectionID + ', Codinsee: ' + l_codinsee + ', Section: ' + l_section;
+                                comsecTDiv.textContent = sectionInformation;
+                              }
 
                               if (document.getElementById("Create").checked) {
                                 var section = {
