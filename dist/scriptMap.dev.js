@@ -291,7 +291,9 @@ function filterSections(communeCode, sections) {
 
 document.getElementById("reset").addEventListener('click', function () {
   totalVentes = 0;
+  totalVentes2 = 0;
   document.getElementById("NumberSell").textContent = "";
+  document.getElementById("NumberSell2").textContent = "";
   clickedCommunes.forEach(function (commune) {
     commune.setStyle({
       fillColor: 'blue'
