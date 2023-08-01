@@ -33,11 +33,11 @@ document.getElementById('Count').addEventListener('click', function () {
   sectionsInput.type = 'text';
   sectionsInput.value = selectedSectionsCodinsee.map(function (section) {
     return "".concat(section.nom, ": ").concat(section.code);
-  }).join(', ');
+  }).join(', '); // Afficher uniquement le nom des sections
+
   sectionsInput.readOnly = true; // Rendre l'input en lecture seule
 
   comsecTDiv.appendChild(sectionsInput);
-  console.log(sectionsInput);
 });
 document.getElementById('Export').addEventListener('click', function () {
   // Récupérer le conteneur d'input

@@ -32,11 +32,9 @@ document.getElementById('Count').addEventListener('click', function() {
   // Créer un nouvel input pour les sections sélectionnées
   var sectionsInput = document.createElement('input');
   sectionsInput.type = 'text';
-  sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', ');
+  sectionsInput.value = selectedSectionsCodinsee.map(section => `${section.nom}: ${section.code}`).join(', '); // Afficher uniquement le nom des sections
   sectionsInput.readOnly = true;  // Rendre l'input en lecture seule
   comsecTDiv.appendChild(sectionsInput);
-  console.log(sectionsInput);
-  
 });
   
 document.getElementById('Export').addEventListener('click', function() {
