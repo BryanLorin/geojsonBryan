@@ -18,27 +18,6 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
-console.log("Event listener for 'egalmarcher' button added.");
-document.getElementById('egalmarcher').addEventListener('click', function () {
-  // Retrieve the user input from the 'nbventesclient' text field
-  var userInput = parseFloat(document.getElementById('nbventesclient').value); // Perform the multiplication and division operations
-
-  var result = userInput * totalVentes / 100; // Log the result to the console for debugging
-
-  console.log("Result:", result); // Create a new input element to display the result
-
-  var resultInput = document.createElement('input');
-  resultInput.type = 'text';
-  resultInput.value = result.toFixed(2); // Display the result with two decimal places
-
-  resultInput.readOnly = true; // Make the input read-only
-  // Append the new input element to the 'resultatmarcher' div
-
-  var resultatmarcherDiv = document.getElementById('resultatmarcher');
-  resultatmarcherDiv.innerHTML = ''; // Clear previous content, if any
-
-  resultatmarcherDiv.appendChild(resultInput);
-});
 document.getElementById('Count').addEventListener('click', function () {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
@@ -105,6 +84,24 @@ document.getElementById('Export').addEventListener('click', function () {
   }); // Display the total sales
 
   document.getElementById("TotalSecteur").value = totalSecteur;
+}); // Ajouter un événement "click" au bouton "egalmarcher"
+
+document.getElementById('egalmarcher').addEventListener('click', function () {
+  // Récupérer le nombre saisi dans le champ "nbventesclient"
+  var nbventesclient = parseFloat(document.getElementById('nbventesclient').value); // Vérifier si le nombre saisi est valide
+
+  if (!isNaN(nbventesclient)) {
+    // Effectuer les opérations de multiplication et de division
+    var resultat = nbventesclient * totalVentes / 100; // Créer un nouvel input pour afficher le résultat dans la div "resultatmarcher"
+
+    var resultatInput = document.createElement('input');
+    resultatInput.type = 'text';
+    resultatInput.value = resultat;
+    resultatInput.readOnly = true;
+    document.getElementById('resultatmarcher').appendChild(resultatInput);
+  } else {
+    alert('Veuillez entrer un nombre valide dans le champ "nbventesclient".');
+  }
 });
 select.addEventListener('change', function () {
   var region = this.value;
