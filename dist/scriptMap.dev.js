@@ -16,19 +16,10 @@ var communesLayer;
 var sectionsLayer;
 var totalSecteur = 0;
 var select = document.getElementById('region');
-document.getElementById('NumberSell').addEventListener('input', function () {
-  try {
-    var partValue = document.getElementById('Part').value;
-    var marketShare = partValue * 100 / this.value;
-    document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
-    console.log("Market Share: " + marketShare.toFixed(2) + "%"); // Log the result to the console
-  } catch (error) {
-    console.error("An error occurred: ", error);
-  }
-});
 document.getElementById('Part').addEventListener('input', function () {
   try {
-    var numberSellValue = document.getElementById('NumberSell').value;
+    var numberSellValue = parseFloat(document.getElementById('NumberSell').textContent.split(': ')[1]); // Get the displayed total of sales
+
     var marketShare = this.value * 100 / numberSellValue;
     document.getElementById('MarketShare').textContent = "Market Share: " + marketShare.toFixed(2) + "%";
     console.log("Market Share: " + marketShare.toFixed(2) + "%"); // Log the result to the console
