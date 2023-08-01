@@ -20,7 +20,6 @@ document.getElementById('Count').addEventListener('click', function() {
   if (clickedCommunes.length === 0) {
     totalVentes = 0;
     document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-    document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
   }
 });
   
@@ -178,19 +177,17 @@ select.addEventListener('change', function () {
                           venteParCommune.vente.anneemut >= "2017" && venteParCommune.vente.anneemut <= "2020"
                         );
 
-                        if (document.getElementById("Count").checked) {
-                          totalVentes += Math.round(ventesDansCetteCommune.length / 4);
-                          document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                          document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
-                          layer.setStyle({ fillColor: 'red' });
-                          clickedCommunes.push(layer);
-                      } else {
-                          totalVentes = Math.round(ventesDansCetteCommune.length / 4);
-                          document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                          document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
-                      }
-                      
-                        
+                        if (document.getElementById("Communes").checked) {
+                          if (document.getElementById("Count").checked) {
+                            totalVentes += Math.round(ventesDansCetteCommune.length / 4);
+                            document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                            layer.setStyle({ fillColor: 'red' });
+                            clickedCommunes.push(layer);
+                          } else {
+                            totalVentes = Math.round(ventesDansCetteCommune.length / 4);
+                            document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
+                          }
+                        }
 
                         if (document.getElementById("Sections").checked) {
                           fetch(`https://raw.githubusercontent.com/BryanLorin/geojsonBryan/main/${region}/sections-${region}-${departementCode}.json`)
@@ -252,14 +249,12 @@ select.addEventListener('change', function () {
                                     if (document.getElementById("Count").checked) {
                                       totalVentes += Math.round(ventesDansCetteSection.length / 4);
                                       document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                      document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
                                       layer.setStyle({ fillColor: 'red' });
                                       clickedSections.push(layer);
-                                  } else {
+                                    } else {
                                       totalVentes = Math.round(ventesDansCetteSection.length / 4);
                                       document.getElementById("NumberSell").textContent = "Total: " + totalVentes;
-                                      document.getElementById("NumberSell2").textContent = "Total: " + totalVentes;
-                                  }
+                                    }
                                   });
                                 },
                               }).addTo(map);
@@ -289,12 +284,23 @@ function filterSections(communeCode, sections) {
   });
 }
   // Reset totalVentes and clickedCommunes when reset button is clicked
-  document.getElementById("reset").addEventListener('click', function () {
-    totalVentes = 0;
-    document.getElementById("NumberSell").textContent = "";
-    document.getElementById("NumberSell2").textContent = "";
-    clickedCommunes.forEach(function (commune) {
-        commune.setStyle({ fillColor: 'blue' });  // Replace 'blue' with your original color
-    });
-    clickedCommunes = [];
+document.getElementById("reset").addEventListener('click', function () {
+  totalVentes = 0;
+  document.getElementById("NumberSell").textContent = "";
+  clickedCommunes.forEach(function (commune) {
+    commune.setStyle({ fillColor: 'blue' });  // Replace 'blue' with your original color
+  });
+  clickedCommunes = [];
+});
+document.getElementById('nbventesclient').addEventListener('input', function () {
+  var nbVentesClient = parseFloat(this.value);
+  var numberSellValue = parseFloat(document.getElementById('NumberSell').textContent.split(' ')[1]); // Extract the value from the "NumberSell" TextBlock
+
+  if (!isNaN(nbVentesClient) && !isNaN(numberSellValue)) {
+    var result = (nbVentesClient * numberSellValue) / 100;
+    document.getElementById('resultatmarcher').textContent = result.toString();
+  } else {
+    // Handle the case where the input values are not numbers
+    document.getElementById('resultatmarcher').textContent = "Invalid input";
+  }
 });
